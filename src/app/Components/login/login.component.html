@@ -1,0 +1,106 @@
+<section
+  class="bg-[#082A3D] h-[calc(100vh-96px)] flex flex-col gap-6 justify-center items-center"
+>
+  @if(user){
+
+  <h1 class="text-4xl text-center text-white">
+    @if(user=== 'employee'){ Staff } Login
+  </h1>
+
+  <form
+    class="flex max-w-2xl w-full flex-col gap-7"
+    (ngSubmit)="handleLogin(loginForm)"
+    [formGroup]="loginForm"
+  >
+    <div class="flex flex-col pt-2 relative">
+      <p-floatLabel>
+        <input id="email" type="email" pInputText formControlName="email" />
+        <label for="email">Email</label>
+      </p-floatLabel>
+
+      @if(loginForm.get('email')?.invalid && loginForm.get('email')?.touched){
+      @if(loginForm.get('email')?.getError('email')){
+
+      <p-message severity="error" text="Invalid email format"></p-message>
+
+      } @else if (loginForm.get('email')?.getError('required')){
+      <p-message severity="error" text="email is required"></p-message>
+
+      } }
+    </div>
+
+    <div class="flex flex-col pt-2 relative">
+      <p-floatLabel>
+        <input
+          id="password"
+          type="password"
+          pInputText
+          formControlName="password"
+        />
+        <label for="password">Password</label>
+      </p-floatLabel>
+
+      @if(loginForm.get('password')?.invalid &&
+      loginForm.get('password')?.touched){
+      @if(loginForm.get('password')?.getError('required')){
+
+      <p-message severity="error" text="password is required"></p-message>
+
+      } @else if (loginForm.get('password')?.getError('pattern')) {
+
+      <p-message
+        severity="error"
+        text="password must contain at least one uppercase, one lowercase, one number and one special character"
+      ></p-message>
+      } }
+    </div>
+
+    <button
+      type="submit"
+      pButton
+      pRipple
+      class="p-button-info flex items-center gap-3 bg-gray-400 text-white border-0 w-fit mx-auto"
+    >
+      @if(loading){
+      <p-progressSpinner
+        styleClass="w-5 h-5"
+        strokeWidth="8"
+        ariaLabel="loading"
+        fill="transparent"
+        animationDuration="1s"
+      ></p-progressSpinner>
+
+      } Login
+    </button>
+
+    <div class="flex items-center justify-center gap-3">
+      <a [routerLink]="['/forgot-password']" class="text-white hover:underline"
+        >Forgot password?</a
+      >
+    </div>
+  </form>
+
+  } @else {
+  <h1 class="text-4xl text-center text-white">Login</h1>
+  <div class="flex gap-28 mt-16 items-center justify-center">
+    <button
+      pButton
+      label="Visitors"
+      (click)="loginAsVisitor()"
+      class="bg-gray-400 text-white border-0"
+      severity="secondary"
+    ></button>
+
+    <button
+      pButton
+      label="Employee"
+      (click)="loginAsEmployee()"
+      class="bg-gray-400 text-white border-0"
+      severity="secondary"
+    ></button>
+  </div>
+
+  }
+</section>
+
+<p-toast></p-toast>

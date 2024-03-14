@@ -1,0 +1,173 @@
+<section
+  class="bg-[#082A3D] py-8 flex flex-col gap-6 justify-center items-center"
+>
+  <h1 class="text-4xl text-center text-white">Sign Up</h1>
+
+  <form
+    class="flex max-w-2xl w-full flex-col gap-7"
+    (ngSubmit)="handleRegister(registerForm)"
+    [formGroup]="registerForm"
+  >
+    <div class="flex flex-col pt-2 relative">
+      <p-floatLabel>
+        <input
+          id="firstname"
+          type="text"
+          pInputText
+          formControlName="firstName"
+        />
+        <label for="firstname">First Name</label>
+      </p-floatLabel>
+
+      @if(registerForm.get('firstName')?.invalid &&
+      registerForm.get('firstName')?.touched){
+      @if(registerForm.get('firstName')?.getError('required')){
+
+      <p-message severity="error" text="firstName is required"></p-message>
+
+      } @else if (registerForm.get('firstName')?.getError('minlength')) {
+
+      <p-message
+        severity="error"
+        text="firstName must be at least 3 characters"
+      ></p-message>
+      } }
+    </div>
+    <div class="flex flex-col pt-2 relative">
+      <p-floatLabel>
+        <input
+          id="lastname"
+          type="text"
+          pInputText
+          formControlName="lastName"
+        />
+        <label for="lastname">Last Name</label>
+      </p-floatLabel>
+      @if(registerForm.get('lastName')?.invalid &&
+      registerForm.get('lastName')?.touched){
+      @if(registerForm.get('lastName')?.getError('required')){
+
+      <p-message severity="error" text="lastName is required"></p-message>
+
+      } @else if (registerForm.get('lastName')?.getError('minlength')) {
+
+      <p-message
+        severity="error"
+        text="lastName must be at least 3 characters"
+      ></p-message>
+      } }
+    </div>
+    <div class="flex flex-col pt-2 relative">
+      <p-floatLabel>
+        <input id="email" type="email" pInputText formControlName="email" />
+        <label for="email">Email</label>
+      </p-floatLabel>
+
+      @if(registerForm.get('email')?.invalid &&
+      registerForm.get('email')?.touched){
+      @if(registerForm.get('email')?.getError('email')){
+
+      <p-message severity="error" text="Invalid email format"></p-message>
+
+      } @else if (registerForm.get('email')?.getError('required')){
+      <p-message severity="error" text="email is required"></p-message>
+
+      } }
+    </div>
+    <div class="flex flex-col pt-2 relative">
+      <p-floatLabel>
+        <input id="phone" type="tel" pInputText formControlName="phoneNumber" />
+        <label for="phone">Phone Number</label>
+      </p-floatLabel>
+
+      @if(registerForm.get('phoneNumber')?.invalid &&
+      registerForm.get('phoneNumber')?.touched){
+      @if(registerForm.get('phoneNumber')?.getError('required')){
+
+      <p-message severity="error" text="phoneNumber is required"></p-message>
+
+      } @else if (registerForm.get('phoneNumber')?.getError('minlength')) {
+
+      <p-message
+        severity="error"
+        text="phoneNumber must be at least 3 characters"
+      ></p-message>
+      } }
+    </div>
+    <div class="flex flex-col pt-2 relative">
+      <p-floatLabel>
+        <input
+          id="password"
+          type="password"
+          pInputText
+          formControlName="password"
+        />
+        <label for="password">Password</label>
+      </p-floatLabel>
+
+      @if(registerForm.get('password')?.invalid &&
+      registerForm.get('password')?.touched){
+      @if(registerForm.get('password')?.getError('required')){
+
+      <p-message severity="error" text="password is required"></p-message>
+
+      } @else if (registerForm.get('password')?.getError('pattern')) {
+
+      <p-message
+        severity="error"
+        text="password must contain at least one uppercase, one lowercase, one number and one special character"
+      ></p-message>
+      } }
+    </div>
+    <div class="flex flex-col pt-2 relative">
+      <p-floatLabel>
+        <input
+          id="confirm_password"
+          type="password"
+          pInputText
+          formControlName="confirmPassword"
+        />
+        <label for="confirm_password">Confirmation</label>
+      </p-floatLabel>
+
+      @if(registerForm.get('confirmPassword')?.invalid &&
+      registerForm.get('confirmPassword')?.touched){
+      @if(registerForm.get('confirmPassword')?.getError('required')){
+
+      <p-message
+        severity="error"
+        text="confirm password is required"
+      ></p-message>
+
+      } @else if (registerForm.get('confirmPassword')?.getError('pattern')) {
+
+      <p-message
+        severity="error"
+        text="confirm password must contain at least one uppercase, one lowercase, one number and one special character"
+      ></p-message>
+      } @else if (registerForm.get('confirmPassword')?.getError('notMatch')) {
+
+      <p-message severity="error" text="Passwords must match"></p-message>
+      } }
+    </div>
+
+    <button
+      type="submit"
+      pButton
+      pRipple
+      class="p-button-info flex items-center gap-3 bg-gray-400 text-white border-0 w-fit mx-auto"
+    >
+      @if(loading){
+      <p-progressSpinner
+        styleClass="w-5 h-5"
+        strokeWidth="8"
+        ariaLabel="loading"
+        fill="transparent"
+        animationDuration="1s"
+      ></p-progressSpinner>
+
+      } Register Now
+    </button>
+  </form>
+</section>
+<p-toast></p-toast>
