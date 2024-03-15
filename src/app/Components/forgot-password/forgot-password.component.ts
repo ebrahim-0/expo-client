@@ -48,13 +48,10 @@ export class ForgotPasswordComponent {
   handleReset(resetForm: any) {
     resetForm.markAllAsTouched();
 
-    console.log(resetForm.value);
-
     if (resetForm.valid) {
       this.loading = true;
       this._AuthService.forgotPassword(resetForm.value).subscribe({
         next: (res) => {
-          console.log(res);
           this.loading = false;
           this._MessageService.add({
             severity: 'success',
@@ -70,7 +67,6 @@ export class ForgotPasswordComponent {
         },
         error: (error) => {
           this.loading = false;
-          console.log(error);
           this._MessageService.add({
             severity: 'error',
             summary: 'Error',

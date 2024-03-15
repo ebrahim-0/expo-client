@@ -72,7 +72,6 @@ export class LoginComponent implements OnInit {
         .subscribe({
           next: (res) => {
             this.loading = false;
-            console.log(res);
 
             this._CookieService.set('token', res.token);
 
@@ -89,7 +88,6 @@ export class LoginComponent implements OnInit {
           },
           error: (error) => {
             this.loading = false;
-            console.error(error);
 
             this._MessageService.add({
               severity: 'error',
