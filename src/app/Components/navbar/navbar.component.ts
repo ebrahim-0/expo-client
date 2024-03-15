@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -24,7 +24,7 @@ import { AuthService } from '../../Services/auth.service';
     ]),
   ],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   isMobileMenu = false;
 
   currentUser!: any;

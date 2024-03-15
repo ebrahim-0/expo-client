@@ -1,4 +1,8 @@
 <main
+  [ngClass]="{
+    'h-[calc(100vh-96px)]': currentUser,
+    'min-h-screen': !currentUser
+  }"
   class="grid h-[calc(100vh-96px)] px-6 py-24 bg-[#082A3D] place-items-center sm:py-32 lg:px-8"
 >
   <div class="text-center">
