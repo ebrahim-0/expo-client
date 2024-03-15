@@ -1,1 +1,107 @@
-<p>home works!</p>
+@if(currentUser){
+
+<section class="bg-[#082A3D] relative h-[calc(100vh-96px)]">
+  <div class="absolute -translate-x-1/2 -translate-y-2/3 top-1/2 left-1/2">
+    <h1 class="my-10 text-4xl text-center text-white">
+      Welcome, {{ currentUser.firstName }}
+    </h1>
+
+    <div
+      class="flex items-center justify-center px-2 mx-auto max-w-7xl sm:px-6 lg:px-8"
+    >
+      <div class="flex flex-col items-center gap-6">
+        <button
+          class="px-4 py-2 font-bold text-white bg-gray-400 rounded focus:outline-none focus:shadow-outline"
+        >
+          Pavilions
+        </button>
+        <button
+          class="px-4 py-2 font-bold text-white bg-gray-400 rounded focus:outline-none focus:shadow-outline"
+        >
+          Facilities
+        </button>
+
+        <button
+          class="px-4 py-2 font-bold text-white bg-gray-400 rounded focus:outline-none focus:shadow-outline"
+        >
+          Show time
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+} @else {
+
+<section
+  class="bg-[#082A3D] relative min-h-screen bg-no-repeat bg-cover bg-center bg-fixed z-30"
+  style="background-image: url(../../../assets/bottom-left.jpg)"
+>
+  <div
+    class="flex items-center justify-between px-2 mx-auto max-w-7xl sm:px-6 lg:px-8"
+  >
+    <div class="flex items-center flex-shrink-0 cursor-pointer" routerLink="/">
+      <img class="block w-auto h-24" src="assets/logo.png" alt="Your Company" />
+    </div>
+
+    <div class="flex items-center bg-gray-400 rounded-md">
+      <button
+        routerLink="/login"
+        class="py-2 pl-4 font-bold text-white rounded focus:outline-none focus:shadow-outline"
+      >
+        Log In
+      </button>
+      <span class="mx-2 text-white">/</span>
+      <button
+        routerLink="/register"
+        class="py-2 pr-4 font-bold text-white rounded focus:outline-none focus:shadow-outline"
+      >
+        Sign Up
+      </button>
+    </div>
+  </div>
+
+  <div class="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2">
+    <button class="px-5 py-2 border-2 text-[#FFFFFF] font-bold rounded-md">
+      Browse as a guest
+    </button>
+  </div>
+</section>
+
+<!-- <section
+  class="bg-[#082A3D] relative overflow-hidden min-h-screen max-w[3567px]"
+>
+  <div class="flex items-center justify-between px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <div class="flex items-center flex-shrink-0 cursor-pointer" routerLink="/">
+      <img class="block w-auto h-24" src="assets/logo.png" alt="Your Company" />
+    </div>
+
+    <div class="flex items-center bg-gray-400 rounded-md">
+      <button
+        routerLink="/login"
+        class="py-2 pl-4 font-bold text-white rounded focus:outline-none focus:shadow-outline"
+      >
+        Log In
+      </button>
+      <span class="mx-2 text-white">/</span>
+      <button
+        routerLink="/register"
+        class="py-2 pr-4 font-bold text-white rounded focus:outline-none focus:shadow-outline"
+      >
+        Sign Up
+      </button>
+    </div>
+  </div>
+
+  <img
+    class="absolute w-[55%] h-3/5 top-0 object-cover block opacity-60 -right-24 rounded-tl-[94px]"
+    src="assets/top-right.jpg"
+  />
+
+  <img
+    class="absolute w-4/5 h-3/4 object-cover bottom-5 opacity-70 -left-24 rounded-[94px]"
+    src="assets/bottom-left.jpg"
+  />
+</section> -->
+
+}

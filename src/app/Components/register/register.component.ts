@@ -14,12 +14,13 @@ import { AuthService } from '../../Services/auth.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { CookieService } from 'ngx-cookie-service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
+    RouterModule,
     FloatLabelModule,
     ButtonModule,
     InputTextModule,

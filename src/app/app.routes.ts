@@ -25,10 +25,10 @@ export const routes: Routes = [
   },
 
   {
-    path: 'about-us',
+    path: '**',
     loadComponent: () =>
-      import('./Components/aboutus/aboutus.component').then(
-        (m) => m.AboutusComponent
+      import('./Components/not-founded/not-founded.component').then(
+        (m) => m.NotFoundedComponent
       ),
   },
 ];

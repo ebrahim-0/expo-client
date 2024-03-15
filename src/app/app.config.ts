@@ -14,7 +14,6 @@ export const appConfig: ApplicationConfig = {
     {
       provide: 'API_URL',
       useValue: 'https://expo-api-k8t6.onrender.com',
-
       // useValue: 'http://localhost:5000',
     },
   ],

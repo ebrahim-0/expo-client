@@ -1,6 +1,13 @@
 <section
-  class="bg-[#082A3D] h-[calc(100vh-96px)] flex flex-col gap-6 justify-center items-center"
+  class="bg-[#082A3D] min-h-screen flex flex-col gap-6 justify-center items-center"
 >
+  <div
+    class="flex items-center flex-shrink-0 mb-5 cursor-pointer"
+    routerLink="/"
+  >
+    <img class="block w-auto h-24" src="assets/logo.png" alt="Your Company" />
+  </div>
+
   @if(user){
 
   <h1 class="text-4xl text-center text-white">
@@ -8,11 +15,11 @@
   </h1>
 
   <form
-    class="flex max-w-2xl w-full flex-col gap-7"
+    class="flex flex-col w-full max-w-2xl gap-7"
     (ngSubmit)="handleLogin(loginForm)"
     [formGroup]="loginForm"
   >
-    <div class="flex flex-col pt-2 relative">
+    <div class="relative flex flex-col pt-2">
       <p-floatLabel>
         <input id="email" type="email" pInputText formControlName="email" />
         <label for="email">Email</label>
@@ -29,7 +36,7 @@
       } }
     </div>
 
-    <div class="flex flex-col pt-2 relative">
+    <div class="relative flex flex-col pt-2">
       <p-floatLabel>
         <input
           id="password"
@@ -59,7 +66,7 @@
       type="submit"
       pButton
       pRipple
-      class="p-button-info flex items-center gap-3 bg-gray-400 text-white border-0 w-fit mx-auto"
+      class="flex items-center gap-3 mx-auto text-white bg-gray-400 border-0 p-button-info w-fit"
     >
       @if(loading){
       <p-progressSpinner
@@ -82,12 +89,12 @@
 
   } @else {
   <h1 class="text-4xl text-center text-white">Login</h1>
-  <div class="flex gap-28 mt-16 items-center justify-center">
+  <div class="flex items-center justify-center mt-16 gap-28">
     <button
       pButton
       label="Visitors"
       (click)="loginAsVisitor()"
-      class="bg-gray-400 text-white border-0"
+      class="text-white bg-gray-400 border-0"
       severity="secondary"
     ></button>
 
@@ -95,7 +102,7 @@
       pButton
       label="Employee"
       (click)="loginAsEmployee()"
-      class="bg-gray-400 text-white border-0"
+      class="text-white bg-gray-400 border-0"
       severity="secondary"
     ></button>
   </div>
