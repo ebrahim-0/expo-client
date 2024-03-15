@@ -46,17 +46,38 @@ export class ResetPasswordComponent implements OnInit {
     private _Router: Router
   ) {}
 
-  resetForm: FormGroup = new FormGroup({
-    newPassword: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$'),
-    ]),
-  });
+  resetForm: FormGroup = new FormGroup(
+    {
+      newPassword: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$'),
+      ]),
+      confirmPassword: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$'),
+      ]),
+    },
+    { validators: this.matchPassword }
+  );
 
   ngOnInit(): void {
     this._ActivatedRoute.queryParams.subscribe((params) => {
       this.userId = params['userId'] || '';
     });
+  }
+
+  matchPassword(resetForm: any) {
+    if (
+      resetForm.get('newPassword')?.value !==
+      resetForm.get('confirmPassword')?.value
+    ) {
+      const match = { notMatch: 'Passwords do not match' };
+
+      resetForm.get('confirmPassword')?.setErrors(match);
+      return match;
+    } else {
+      return null;
+    }
   }
 
   handleResetPassword(resetPasswordForm: FormGroup) {
@@ -66,7 +87,7 @@ export class ResetPasswordComponent implements OnInit {
       this.loading = true;
 
       this._AuthService
-        .resetPassword(this.userId, resetPasswordForm.value)
+        .resetPassword(this.userId, resetPasswordForm.value.newPassword)
         .subscribe({
           next: (res) => {
             this.loading = false;

@@ -33,7 +33,10 @@ export class AuthService {
   logoutUser(): void {
     this._CookieService.delete('token');
     this._CookieService.delete('user');
-    this.currentUser.next(null);
+
+    setTimeout(() => {
+      this.currentUser.next(null);
+    }, 1000);
   }
 
   forgotPassword(email: object): Observable<any> {
@@ -61,7 +64,7 @@ export class AuthService {
   resetPassword(userId: string, newPassword: object): Observable<any> {
     return this._HttpClient.put(
       `${this.API_URL}/api/v1/auth/resetPassword`,
-      newPassword,
+      { newPassword },
       {
         params: {
           userId,

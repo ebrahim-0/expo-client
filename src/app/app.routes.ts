@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './Components/home/home.component';
 import { authGuard } from './Guards/auth.guard';
+import { pageGuard } from './Guards/page.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -21,6 +22,16 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./Components/register/register.component').then(
         (m) => m.RegisterComponent
+      ),
+  },
+  {
+    path: 'about-us',
+
+    canActivate: [pageGuard],
+
+    loadComponent: () =>
+      import('./Components/aboutus/aboutus.component').then(
+        (m) => m.AboutusComponent
       ),
   },
 

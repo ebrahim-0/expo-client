@@ -4,11 +4,13 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { AuthService } from '../../Services/auth.service';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule, InputTextModule, CommonModule],
+  imports: [RouterModule, InputTextModule, CommonModule, ToastModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
   animations: [
@@ -23,6 +25,8 @@ import { AuthService } from '../../Services/auth.service';
       ]),
     ]),
   ],
+
+  providers: [MessageService],
 })
 export class NavbarComponent implements OnInit {
   isMobileMenu = false;
@@ -37,7 +41,10 @@ export class NavbarComponent implements OnInit {
     { path: 'ticket', label: 'Ticket' },
   ];
 
-  constructor(private _AuthService: AuthService) {}
+  constructor(
+    private _AuthService: AuthService,
+    private _MessageService: MessageService
+  ) {}
 
   ngOnInit(): void {
     this._AuthService.currentUser.subscribe((user) => {
@@ -47,6 +54,12 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this._AuthService.logoutUser();
+
+    this._MessageService.add({
+      severity: 'info',
+      summary: 'Logout',
+      detail: 'You have been logged out successfully',
+    });
   }
 
   closeMenu() {
