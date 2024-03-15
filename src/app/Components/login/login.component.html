@@ -80,10 +80,15 @@
       } Login
     </button>
 
-    <div class="flex items-center justify-center gap-3">
+    <div class="flex flex-col items-center justify-center gap-3">
       <a [routerLink]="['/forgot-password']" class="text-white hover:underline"
         >Forgot password?</a
       >
+
+      <p class="mb-5 text-center text-white">
+        Don't have an account yet?
+        <a class="underline" routerLink="/register">Register now!</a>
+      </p>
     </div>
   </form>
 

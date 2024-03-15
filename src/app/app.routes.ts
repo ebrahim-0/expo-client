@@ -25,6 +25,35 @@ export const routes: Routes = [
   },
 
   {
+    path: 'forgot-password',
+    canActivate: [authGuard],
+
+    loadComponent: () =>
+      import('./Components/forgot-password/forgot-password.component').then(
+        (m) => m.ForgotPasswordComponent
+      ),
+  },
+
+  {
+    path: 'verify-reset-code',
+    canActivate: [authGuard],
+
+    loadComponent: () =>
+      import('./Components/verify-reset-code/verify-reset-code.component').then(
+        (m) => m.VerifyResetCodeComponent
+      ),
+  },
+  {
+    path: 'reset-password',
+    canActivate: [authGuard],
+
+    loadComponent: () =>
+      import('./Components/reset-password/reset-password.component').then(
+        (m) => m.ResetPasswordComponent
+      ),
+  },
+
+  {
     path: '**',
     loadComponent: () =>
       import('./Components/not-founded/not-founded.component').then(

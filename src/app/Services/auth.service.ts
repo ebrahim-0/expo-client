@@ -36,6 +36,40 @@ export class AuthService {
     this.currentUser.next(null);
   }
 
+  forgotPassword(email: object): Observable<any> {
+    return this._HttpClient.post(
+      `${this.API_URL}/api/v1/auth/forgotPassword`,
+      email
+    );
+  }
+
+  verifyResetCode(resetCode: string): Observable<any> {
+    return this._HttpClient.post(
+      `${this.API_URL}/api/v1/auth/verifyResetCode`,
+      {
+        resetCode,
+      }
+    );
+  }
+
+  resendCode(userId: any): Observable<any> {
+    return this._HttpClient.post(`${this.API_URL}/api/v1/auth/resendCode`, {
+      userId,
+    });
+  }
+
+  resetPassword(userId: string, newPassword: object): Observable<any> {
+    return this._HttpClient.put(
+      `${this.API_URL}/api/v1/auth/resetPassword`,
+      newPassword,
+      {
+        params: {
+          userId,
+        },
+      }
+    );
+  }
+
   decodeUserData(token: string) {
     const encodedToken: any = jwtDecode(token);
     this.currentUser.next(encodedToken);

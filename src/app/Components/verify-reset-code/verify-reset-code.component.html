@@ -1,0 +1,50 @@
+<section
+  class="bg-[#082A3D] min-h-screen flex flex-col gap-12 justify-center items-center"
+>
+  <div
+    class="flex items-center flex-shrink-0 mb-5 cursor-pointer"
+    routerLink="/"
+  >
+    <img class="block w-auto h-24" src="assets/logo.png" alt="Your Company" />
+  </div>
+
+  <ng-otp-input
+    (onInputChange)="onOtpChange($event)"
+    (keyup.enter)="submitOtp()"
+    #otp
+    [config]="{
+      length: 5,
+      allowNumbersOnly: true,
+      inputClass: 'bg-transparent !text-white !text-center !rounded-md',
+      inputStyles: { 'border-bottom': '2px solid #fff' },
+      containerClass: 'flex justify-center gap-4',
+      }"
+  ></ng-otp-input>
+
+  <p class="text-center text-white">
+    Didn't receive the code?
+    <a class="text-blue-500 underline cursor-pointer" (click)="resendCode()"
+      >Resend Code</a
+    >
+  </p>
+
+  <button
+    type="submit"
+    pButton
+    pRipple
+    class="flex items-center gap-3 mx-auto text-white bg-gray-400 border-0 p-button-info w-fit"
+    (click)="submitOtp()"
+  >
+    @if (loading) {
+    <p-progressSpinner
+      styleClass="w-5 h-5"
+      strokeWidth="8"
+      ariaLabel="loading"
+      fill="transparent"
+      animationDuration="1s"
+    ></p-progressSpinner>
+    } Reset Password
+  </button>
+</section>
+
+<p-toast></p-toast>
