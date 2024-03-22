@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './Components/home/home.component';
 import { authGuard } from './Guards/auth.guard';
 import { pageGuard } from './Guards/page.guard';
+import { adminGuard } from './Guards/admin.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -18,27 +19,34 @@ export const routes: Routes = [
   {
     path: 'register',
     canActivate: [authGuard],
-
     loadComponent: () =>
       import('./Components/register/register.component').then(
         (m) => m.RegisterComponent
       ),
   },
-  {
-    path: 'about-us',
 
-    canActivate: [pageGuard],
+  {
+    path: 'register-employee',
+    canActivate: [adminGuard],
+    loadComponent: () =>
+      import('./Components/register-employee/register-employee.component').then(
+        (m) => m.RegisterEmployeeComponent
+      ),
+  },
+
+  {
+    path: 'users',
+    canActivate: [adminGuard],
 
     loadComponent: () =>
-      import('./Components/aboutus/aboutus.component').then(
-        (m) => m.AboutusComponent
+      import('./Components/users/users.component').then(
+        (m) => m.UsersComponent
       ),
   },
 
   {
     path: 'forgot-password',
     canActivate: [authGuard],
-
     loadComponent: () =>
       import('./Components/forgot-password/forgot-password.component').then(
         (m) => m.ForgotPasswordComponent
@@ -48,7 +56,6 @@ export const routes: Routes = [
   {
     path: 'verify-reset-code',
     canActivate: [authGuard],
-
     loadComponent: () =>
       import('./Components/verify-reset-code/verify-reset-code.component').then(
         (m) => m.VerifyResetCodeComponent
@@ -57,10 +64,44 @@ export const routes: Routes = [
   {
     path: 'reset-password',
     canActivate: [authGuard],
-
     loadComponent: () =>
       import('./Components/reset-password/reset-password.component').then(
         (m) => m.ResetPasswordComponent
+      ),
+  },
+
+  {
+    path: 'pavilions',
+    canActivate: [pageGuard],
+    loadComponent: () =>
+      import('./Components/pavilions/pavilions.component').then(
+        (m) => m.PavilionsComponent
+      ),
+  },
+
+  {
+    path: 'about-us',
+    canActivate: [pageGuard],
+    loadComponent: () =>
+      import('./Components/about-us/about-us.component').then(
+        (m) => m.AboutUsComponent
+      ),
+  },
+
+  {
+    path: 'contact-us',
+    canActivate: [pageGuard],
+    loadComponent: () =>
+      import('./Components/contact-us/contact-us.component').then(
+        (m) => m.ContactUsComponent
+      ),
+  },
+
+  {
+    path: 'work-time',
+    loadComponent: () =>
+      import('./Components/work-time/work-time.component').then(
+        (m) => m.WorkTimeComponent
       ),
   },
 

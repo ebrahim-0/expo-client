@@ -1,0 +1,237 @@
+<section
+  class="bg-[#082A3D] py-8 flex flex-col gap-6 justify-center items-center min-h-[calc(100vh-98px)]"
+>
+  @if(loading){
+  <p-progressSpinner
+    styleClass="w-16 h-16"
+    strokeWidth="8"
+    ariaLabel="loading"
+    fill="transparent"
+    animationDuration="1s"
+  ></p-progressSpinner>
+
+  } @else { @if(userId){
+
+  <h1 class="text-4xl text-center text-white">Update User</h1>
+
+  <form
+    class="flex flex-col w-full max-w-2xl gap-9"
+    (ngSubmit)="updateUserForm(userForm)"
+    [formGroup]="userForm"
+  >
+    <div class="relative flex flex-col pt-2">
+      <p-floatLabel>
+        <input
+          id="firstname"
+          type="text"
+          pInputText
+          formControlName="firstName"
+        />
+        <label for="firstname">First Name</label>
+      </p-floatLabel>
+
+      @if(userForm.get('firstName')?.invalid &&
+      userForm.get('firstName')?.touched){
+      @if(userForm.get('firstName')?.getError('required')){
+
+      <p-message severity="error" text="firstName is required"></p-message>
+
+      } @else if (userForm.get('firstName')?.getError('minlength')) {
+
+      <p-message
+        severity="error"
+        text="firstName must be at least 3 characters"
+      ></p-message>
+      } }
+    </div>
+    <div class="relative flex flex-col pt-2">
+      <p-floatLabel>
+        <input
+          id="lastname"
+          type="text"
+          pInputText
+          formControlName="lastName"
+        />
+        <label for="lastname">Last Name</label>
+      </p-floatLabel>
+      @if(userForm.get('lastName')?.invalid &&
+      userForm.get('lastName')?.touched){
+      @if(userForm.get('lastName')?.getError('required')){
+
+      <p-message severity="error" text="lastName is required"></p-message>
+
+      } @else if (userForm.get('lastName')?.getError('minlength')) {
+
+      <p-message
+        severity="error"
+        text="lastName must be at least 3 characters"
+      ></p-message>
+      } }
+    </div>
+    <div class="relative flex flex-col pt-2">
+      <p-floatLabel>
+        <input id="email" type="email" pInputText formControlName="email" />
+        <label for="email">Email</label>
+      </p-floatLabel>
+
+      @if(userForm.get('email')?.invalid && userForm.get('email')?.touched){
+      @if(userForm.get('email')?.getError('email')){
+
+      <p-message severity="error" text="Invalid email format"></p-message>
+
+      } @else if (userForm.get('email')?.getError('required')){
+      <p-message severity="error" text="email is required"></p-message>
+
+      } }
+    </div>
+    <div class="relative flex flex-col pt-2">
+      <p-floatLabel>
+        <input id="phone" type="tel" pInputText formControlName="phoneNumber" />
+        <label for="phone">Phone Number</label>
+      </p-floatLabel>
+
+      @if(userForm.get('phoneNumber')?.invalid &&
+      userForm.get('phoneNumber')?.touched){
+      @if(userForm.get('phoneNumber')?.getError('required')){
+
+      <p-message severity="error" text="phoneNumber is required"></p-message>
+
+      } @else if (userForm.get('phoneNumber')?.getError('minlength')) {
+
+      <p-message
+        severity="error"
+        text="phoneNumber must be at least 3 characters"
+      ></p-message>
+      } }
+    </div>
+    <div class="relative flex flex-col pt-2">
+      <p-floatLabel>
+        <p-dropdown
+          styleClass="w-full bg-transparent border-0 border-b-2 border-white rounded-none text-white shadow-none"
+          formControlName="rule"
+          [options]="rules"
+          placeholder="Select the rule"
+        ></p-dropdown>
+
+        <label for="rule">Rule</label>
+      </p-floatLabel>
+
+      @if(userForm.get('rule')?.invalid && userForm.get('rule')?.touched){
+      @if(userForm.get('rule')?.getError('required')){
+
+      <p-message severity="error" text="rule is required"></p-message>
+
+      } }
+    </div>
+    <!-- <div class="relative flex flex-col pt-2">
+      <p-floatLabel>
+        <input
+          id="password"
+          type="password"
+          pInputText
+          formControlName="password"
+        />
+        <label for="password">Password</label>
+      </p-floatLabel>
+
+      @if(userForm.get('password')?.invalid &&
+      userForm.get('password')?.touched){
+      @if(userForm.get('password')?.getError('required')){
+
+      <p-message severity="error" text="password is required"></p-message>
+
+      } @else if (userForm.get('password')?.getError('pattern')) {
+
+      <p-message
+        severity="error"
+        text="password must contain at least one uppercase, one lowercase, one number and one special character"
+      ></p-message>
+      } }
+    </div>
+    <div class="relative flex flex-col pt-2">
+      <p-floatLabel>
+        <input
+          id="confirm_password"
+          type="password"
+          pInputText
+          formControlName="confirmPassword"
+        />
+        <label for="confirm_password">Confirmation</label>
+      </p-floatLabel>
+
+      @if(userForm.get('confirmPassword')?.invalid &&
+      userForm.get('confirmPassword')?.touched){
+      @if(userForm.get('confirmPassword')?.getError('required')){
+
+      <p-message
+        severity="error"
+        text="confirm password is required"
+      ></p-message>
+
+      } @else if (userForm.get('confirmPassword')?.getError('pattern')) {
+
+      <p-message
+        severity="error"
+        text="confirm password must contain at least one uppercase, one lowercase, one number and one special character"
+      ></p-message>
+      } @else if (userForm.get('confirmPassword')?.getError('notMatch')) {
+
+      <p-message severity="error" text="Passwords do not match"></p-message>
+      } }
+    </div> -->
+
+    <button
+      type="submit"
+      pButton
+      pRipple
+      class="flex items-center gap-3 mx-auto text-white bg-gray-400 border-0 p-button-info w-fit"
+    >
+      @if(submitted){
+      <p-progressSpinner
+        styleClass="w-5 h-5"
+        strokeWidth="8"
+        ariaLabel="loading"
+        fill="transparent"
+        animationDuration="1s"
+      ></p-progressSpinner>
+
+      } Update User
+    </button>
+  </form>
+
+  } @else { @for (user of users; track $index) {
+
+  <div
+    class="cursor-pointer flex flex-col gap-3 text-white p-4 bg-[#0D2F3F] rounded-md shadow-md w-[90%] md:w-[80%] lg:w-[60%] xl:w-[50%]"
+  >
+    <div class="flex items-center justify-between">
+      <h1 class="text-2xl font-bold">
+        {{ user.firstName }} {{ user.lastName }}
+      </h1>
+      <p class="">{{ user.email }}</p>
+    </div>
+    <p class="">{{ user.rule }}</p>
+    <div class="flex items-center justify-between">
+      <button
+        pButton
+        pRipple
+        class="flex items-center gap-3 text-white border-0 p-button-info"
+        (click)="updateUser(user)"
+      >
+        Update
+      </button>
+      <button
+        pButton
+        pRipple
+        class="flex items-center gap-3 text-white bg-[#FF0A0A] border-0 p-button-info"
+        (click)="deleteUser(user)"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+
+  } } }
+</section>
+
+<p-toast></p-toast>

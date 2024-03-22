@@ -8,7 +8,7 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root',
 })
 export class AuthService {
-  currentUser = new BehaviorSubject(null);
+  currentUser = new BehaviorSubject<User | null>(null);
 
   constructor(
     private _HttpClient: HttpClient,
@@ -30,12 +30,17 @@ export class AuthService {
     return this._HttpClient.post(`${this.API_URL}/api/v1/auth/login`, user);
   }
 
+  loginAsGuest(): Observable<any> {
+    return this._HttpClient.get(`${this.API_URL}/api/v1/auth/guest`);
+  }
+
   logoutUser(): void {
     this._CookieService.delete('token');
     this._CookieService.delete('user');
 
     setTimeout(() => {
       this.currentUser.next(null);
+      window.location.reload();
     }, 1000);
   }
 
@@ -78,4 +83,12 @@ export class AuthService {
     this.currentUser.next(encodedToken);
     return encodedToken;
   }
+}
+
+interface User {
+  email: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  rule: string;
 }

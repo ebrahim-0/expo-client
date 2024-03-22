@@ -1,9 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, HostListener, Inject, OnInit } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './Services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,8 @@ export class AppComponent implements OnInit {
   constructor(
     private _HttpClient: HttpClient,
     private _AuthService: AuthService,
+    private _Router: Router,
+    private _CookieService: CookieService,
     @Inject('API_URL') private API_URL: string
   ) {}
 
@@ -41,5 +44,23 @@ export class AppComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+
+  @HostListener('window:load', ['$event'])
+  loadHandler(event: any) {
+    const token = this._CookieService.get('token');
+    if (!token) {
+      this._Router.navigate(['/']);
+    } else {
+    }
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  beforeUnloadHandler(event: any) {
+    if (this.currentUser?.rule === 'guest') {
+      this._AuthService.logoutUser();
+    } else {
+      return;
+    }
   }
 }

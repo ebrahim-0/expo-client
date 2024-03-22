@@ -1,0 +1,146 @@
+<section
+  [ngClass]="{ 'h-[calc(100vh-98px)]': action }"
+  class="bg-[#082A3D] relative py-9 bg-no-repeat bg-cover bg-center bg-fixed z-30 flex flex-col justify-center items-center"
+  style="background-image: url(../../../assets/bottom-left.jpg)"
+>
+  <div class="absolute top-0 w-full h-full bg-white opacity-25"></div>
+
+  <div
+    class="relative z-40 text-lg font-bold h-fit text-[#FFFFFF] rounded-2xl p-9 md:p-20 mx-9 md:mx-32 text-center border bg-[#0E2431]"
+  >
+    @if(action){
+
+    <h1 class="mb-8">New Pavilions</h1>
+
+    <form
+      class="w-[15rem] md:w-[30rem] lg:w-[45rem] mx-auto"
+      [formGroup]="pavilionForm"
+      (ngSubmit)="submitAddPavilion(pavilionForm)"
+    >
+      <div class="flex flex-col gap-7">
+        <div class="relative flex flex-col pt-2">
+          <p-floatLabel>
+            <input id="name" type="text" pInputText formControlName="name" />
+            <label for="name">Name</label>
+          </p-floatLabel>
+
+          @if(pavilionForm.get('name')?.invalid &&
+          pavilionForm.get('name')?.touched){
+          @if(pavilionForm.get('name')?.getError('required')){
+
+          <p-message severity="error" text="name is required"></p-message>
+
+          } }
+        </div>
+        <div class="relative flex flex-col pt-2">
+          <p-floatLabel>
+            <input
+              id="description"
+              type="text"
+              pInputText
+              formControlName="description"
+            />
+            <label for="description">Description</label>
+          </p-floatLabel>
+
+          @if(pavilionForm.get('description')?.invalid &&
+          pavilionForm.get('description')?.touched){
+          @if(pavilionForm.get('description')?.getError('required')){
+
+          <p-message
+            severity="error"
+            text="description is required"
+          ></p-message>
+
+          } }
+        </div>
+
+        <button
+          type="submit"
+          pButton
+          pRipple
+          class="flex items-center gap-3 mx-auto text-white bg-gray-400 border-0 p-button-info w-fit"
+        >
+          @if(loading){
+          <p-progressSpinner
+            styleClass="w-5 h-5"
+            strokeWidth="8"
+            ariaLabel="loading"
+            fill="transparent"
+            animationDuration="1s"
+          ></p-progressSpinner>
+
+          } @if(pavilion.id) { Update } @else { Add }
+        </button>
+      </div>
+    </form>
+
+    } @else {
+    <h1 class="mb-16">Pavilions</h1>
+    @if(pavilions.length){
+
+    <p-table
+      styleClass="h-fit mb-7"
+      tableStyleClass="w-[15rem] md:w-[30rem] lg:w-[45rem] mx-auto"
+      responsiveLayout="scroll"
+      [value]="pavilions"
+      [scrollable]="true"
+      scrollHeight="flex"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>ID</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-pavilion>
+        <tr>
+          <td>{{ pavilion.name }}</td>
+          <td>{{ pavilion.id }}</td>
+          <td>
+            <i
+              (click)="deletePavilion(pavilion.id)"
+              class="cursor-pointer pi pi-trash"
+              style="color: red"
+            ></i>
+            <i
+              (click)="editPavilion(pavilion)"
+              class="ml-4 cursor-pointer pi pi-file-edit"
+              style="color: blue"
+            ></i>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    } @else {
+    <div
+      class="flex justify-center items-center h-[5rem] w-[15rem] md:w-[30rem] lg:w-[45rem] mx-auto bg-[#0E2431] rounded-2xl"
+    >
+      <p>No pavilions found</p>
+    </div>
+    }
+
+    <button
+      type="button"
+      pButton
+      pRipple
+      class="flex items-center gap-3 mx-auto text-white bg-gray-400 border-0 p-button-info w-fit"
+      (click)="addPavilion()"
+    >
+      @if(loading){
+      <p-progressSpinner
+        styleClass="w-5 h-5"
+        strokeWidth="8"
+        ariaLabel="loading"
+        fill="transparent"
+        animationDuration="1s"
+      ></p-progressSpinner>
+
+      } Add Pavilion
+    </button>
+    }
+  </div>
+</section>
+
+<p-toast></p-toast>

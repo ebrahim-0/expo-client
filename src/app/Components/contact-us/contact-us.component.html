@@ -1,0 +1,131 @@
+<section
+  class="bg-[#082A3D] py-10 relative min-h-screen bg-no-repeat bg-cover bg-center bg-fixed z-30 flex flex-col justify-center items-center"
+  style="background-image: url(../../../assets/bottom-left.jpg)"
+>
+  <div class="absolute top-0 w-full h-full bg-white opacity-25"></div>
+
+  <div
+    class="relative z-40 max-w-[850px] text-[#FFFFFF] rounded-2xl p-4 md:p-20 mx-4 md:mx-32 text-center border bg-[#0E2431]"
+  >
+    <div class="flex justify-end">
+      <h1 class="mb-16 text-start basis-2/5">Call center</h1>
+      <div class="text-start basis-3/5">
+        <h3>+966 50 943 9478</h3>
+        <div class="flex justify-between mt-4 gap-7">
+          <p>Operating hours Sunday to Wednesday 10am to 12am</p>
+          <p>Thursday to Saturday 10am to 1am</p>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-end mt-7">
+      <h1 class="mb-16 text-start basis-2/5">Contact Us</h1>
+      <form
+        class="flex flex-col gap-7 text-start basis-3/5"
+        [formGroup]="contactForm"
+        (ngSubmit)="submitForm(contactForm)"
+      >
+        <div>
+          <p-floatLabel>
+            <input id="name" type="text" pInputText formControlName="name" />
+            <label for="name">Name</label>
+          </p-floatLabel>
+
+          @if(contactForm.get('name')?.invalid &&
+          contactForm.get('name')?.touched){
+          @if(contactForm.get('name')?.getError('required')){
+
+          <p-message severity="error" text="name is required"></p-message>
+
+          } @else if (contactForm.get('name')?.getError('minlength')) {
+
+          <p-message
+            severity="error"
+            text="name must be at least 3 characters"
+          ></p-message>
+          } @else if (contactForm.get('name')?.getError('maxlength')) {
+
+          <p-message
+            severity="error"
+            text="name must be at most 10 characters"
+          ></p-message>
+          } }
+        </div>
+
+        <div>
+          <p-floatLabel>
+            <input id="email" type="email" pInputText formControlName="email" />
+            <label for="email">Email</label>
+          </p-floatLabel>
+
+          @if(contactForm.get('email')?.invalid &&
+          contactForm.get('email')?.touched){
+          @if(contactForm.get('email')?.getError('required')){
+
+          <p-message severity="error" text="email is required"></p-message>
+
+          } @else if (contactForm.get('email')?.getError('email')) {
+
+          <p-message severity="error" text="Invalid email format"></p-message>
+
+          }}
+        </div>
+
+        <div>
+          <p-floatLabel>
+            <textarea
+              pInputTextarea
+              cols="30"
+              rows="10"
+              id="message"
+              formControlName="message"
+            ></textarea>
+            <label for="message">Message</label>
+          </p-floatLabel>
+          @if(contactForm.get('message')?.invalid &&
+          contactForm.get('message')?.touched){
+          @if(contactForm.get('message')?.getError('required')){
+
+          <p-message severity="error" text="message is required"></p-message>
+
+          } @else if (contactForm.get('message')?.getError('minlength')) {
+
+          <p-message
+            severity="error"
+            text="message must be at least 10 characters"
+          ></p-message>
+
+          } @else if (contactForm.get('message')?.getError('maxlength')) {
+
+          <p-message
+            severity="error"
+            text="message must be at most 200 characters"
+          ></p-message>
+
+          } }
+        </div>
+
+        <button
+          type="submit"
+          pButton
+          pRipple
+          class="flex items-center justify-center w-full gap-3 py-4 mx-auto text-[#FFFFFF] bg-[#FF0A0A] border-0 p-button-info"
+        >
+          @if(loading){
+          <p-progressSpinner
+            styleClass="w-5 h-5"
+            strokeWidth="8"
+            ariaLabel="loading"
+            fill="transparent"
+            animationDuration="1s"
+          ></p-progressSpinner>
+
+          } Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<app-footer-contact />
+
+<p-toast></p-toast>

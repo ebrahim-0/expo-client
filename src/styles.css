@@ -18,6 +18,7 @@
 .p-inputtext,
 .p-password input {
   width: 100%;
+  color: white;
 }
 
 .p-float-label > label {

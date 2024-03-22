@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { AuthService } from '../../Services/auth.service';
@@ -41,9 +41,12 @@ export class NavbarComponent implements OnInit {
     { path: 'ticket', label: 'Ticket' },
   ];
 
+  adminLinks = [{ path: 'users', label: 'Users' }];
+
   constructor(
     private _AuthService: AuthService,
-    private _MessageService: MessageService
+    private _MessageService: MessageService,
+    private _Router: Router
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +62,20 @@ export class NavbarComponent implements OnInit {
       severity: 'info',
       summary: 'Logout',
       detail: 'You have been logged out successfully',
+    });
+  }
+
+  navigateToRegister() {
+    this._AuthService.currentUser.subscribe({
+      next: (user) => {
+        if (user?.rule === 'admin') {
+          this._Router.navigate(['/register'], {
+            queryParams: { rule: 'admin' },
+          });
+        } else {
+          this._Router.navigateByUrl('/register');
+        }
+      },
     });
   }
 
