@@ -96,7 +96,6 @@ export class UsersComponent implements OnInit {
       if (this.userId) {
         this._UserService.updateUser(this.userId, userForm.value).subscribe({
           next: (res) => {
-            console.log(res);
             this.submitted = false;
             this._MessageService.add({
               severity: 'success',
@@ -125,13 +124,22 @@ export class UsersComponent implements OnInit {
   getUserById() {
     this._UserService.getUserById(this.userId).subscribe({
       next: (res) => {
-        console.log(res);
         this.loading = false;
         this.userForm.patchValue(res.user);
+        this._MessageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: res.message,
+        });
       },
       error: (err) => {
         console.error(err);
         this.loading = false;
+        this._MessageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error.message,
+        });
       },
     });
   }
@@ -139,7 +147,6 @@ export class UsersComponent implements OnInit {
   getAllUsers() {
     this._UserService.getAllUsers().subscribe({
       next: (res) => {
-        console.log(res);
         this.users = res.users;
         this._MessageService.add({
           severity: 'success',
@@ -167,17 +174,20 @@ export class UsersComponent implements OnInit {
   deleteUser(user: User) {
     this._UserService.deleteUser(user._id).subscribe({
       next: (res) => {
-        console.log(res);
         this.users = this.users.filter((u) => u._id !== user._id);
-
         this._MessageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: 'User deleted successfully',
+          detail: res.message,
         });
       },
       error: (err) => {
         console.error(err);
+        this._MessageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error.message,
+        });
       },
     });
   }

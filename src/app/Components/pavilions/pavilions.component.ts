@@ -109,7 +109,6 @@ export class PavilionsComponent implements OnInit {
           .updatePavilion(this.pavilion.id, pavilionForm.value)
           .subscribe({
             next: (res) => {
-              console.log(res);
               this.loading = false;
 
               this._MessageService.add({
@@ -140,8 +139,6 @@ export class PavilionsComponent implements OnInit {
         this.loading = true;
         this._ServicesService.addPavilion(pavilionForm.value).subscribe({
           next: (res) => {
-            console.log(res);
-
             this.loading = false;
 
             this._MessageService.add({
@@ -176,7 +173,6 @@ export class PavilionsComponent implements OnInit {
     this._ServicesService.getAllPavilions().subscribe({
       next: (res) => {
         this.pavilions = res.pavilions;
-        console.log(res);
       },
       error: (error) => {
         console.error(error);
@@ -224,7 +220,6 @@ export class PavilionsComponent implements OnInit {
     } else {
       this._ServicesService.deletePavilion(id).subscribe({
         next: (res) => {
-          console.log(res);
           this.getAllPavilions();
           this._MessageService.add({
             severity: 'info',

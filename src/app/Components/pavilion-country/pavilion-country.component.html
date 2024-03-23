@@ -2,7 +2,7 @@
   class="bg-[#082A3D] overlay py-9 flex flex-col justify-center items-center"
 >
   <div
-    class="text-lg max-w-[805px] min-w-fit text-[#FFFFFF] rounded-2xl p-4 md:p-20 mx-4 md:mx-32 border bg-[#0E2431]"
+    class="text-lg max-w-[805px] min-w-fit text-[#FFFFFF] rounded-2xl p-8 md:p-20 mx-4 md:mx-32 border bg-[#0E2431]"
   >
     <h1 class="text-center md:text-6xl mb-9">
       {{ pavilion?.name }}
@@ -45,8 +45,11 @@
     </p-dialog>
   </div>
 
+  <!-- <div
+    class="text-lg h-fit mt-9 text-[#FFFFFF] rounded-2xl p-4 md:p-20 md:mx-32 border bg-[#0E2431] flex flex-col md:flex-row items-center gap-20"
+  > -->
   <div
-    class="text-lg h-fit mt-9 text-[#FFFFFF] rounded-2xl p-9 md:p-20 mx-9 md:mx-32 border bg-[#0E2431] flex items-center gap-20"
+    class="text-lg max-w-[805px] mt-9 min-w-fit text-[#FFFFFF] rounded-2xl p-10 md:p-20 mx-4 md:mx-32 border flex flex-col md:flex-row items-center gap-5 md:gap-20 bg-[#0E2431]"
   >
     <h3>Reviews</h3>
     <div
@@ -79,7 +82,13 @@
         Write a Review
       </button>
 
-      <p-dialog [modal]="true" [(visible)]="visibleComment">
+      <p-dialog
+        header=""
+        [style]="{ width: '50rem' }"
+        [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+        [modal]="true"
+        [(visible)]="visibleComment"
+      >
         <ng-template pTemplate="headless">
           <form
             [formGroup]="commentForm"
@@ -128,3 +137,5 @@
     </div>
   </div>
 </section>
+
+<p-toast></p-toast>

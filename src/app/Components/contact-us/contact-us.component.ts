@@ -66,8 +66,6 @@ export class ContactUsComponent {
 
       this._UserService.sendMessage(contactForm.value).subscribe({
         next: (res) => {
-          console.log(res);
-
           this._MessageService.add({
             severity: 'success',
             summary: 'Success',

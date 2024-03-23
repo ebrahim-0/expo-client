@@ -89,7 +89,6 @@ export class FacilitiesComponent implements OnInit {
   getAllFacilities() {
     this._ServicesService.getAllFacilities().subscribe({
       next: (res) => {
-        console.log(res);
         this.facilities = res.facilities;
       },
       error: (error) => {
@@ -128,7 +127,6 @@ export class FacilitiesComponent implements OnInit {
     } else {
       this._ServicesService.deleteFacility(id).subscribe({
         next: (res) => {
-          console.log(res);
           this._MessageService.add({
             severity: 'success',
             summary: 'Success',
@@ -156,7 +154,6 @@ export class FacilitiesComponent implements OnInit {
 
       this._ServicesService.addFacility(facilitiesForm.value).subscribe({
         next: (res) => {
-          console.log(res);
           this.loading = false;
           this._MessageService.add({
             severity: 'success',

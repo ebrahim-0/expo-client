@@ -46,8 +46,6 @@ export class HomeComponent implements OnInit {
         this._AuthService.decodeUserData(res.token);
 
         this._Router.navigate(['/about-us']);
-
-        console.log(res);
       },
       error: (err) => {
         console.log(err);

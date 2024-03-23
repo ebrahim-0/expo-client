@@ -12,6 +12,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { AuthService } from '../../Services/auth.service';
 import { ServicesService } from '../../Services/services.service';
 import { MessageModule } from 'primeng/message';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-pavilion-country',
@@ -22,9 +24,11 @@ import { MessageModule } from 'primeng/message';
     DialogModule,
     InputTextareaModule,
     MessageModule,
+    ToastModule,
   ],
   templateUrl: './pavilion-country.component.html',
   styleUrl: './pavilion-country.component.css',
+  providers: [MessageService],
 })
 export class PavilionCountryComponent implements OnInit {
   country: string = '';
@@ -81,7 +85,8 @@ export class PavilionCountryComponent implements OnInit {
   constructor(
     private _ActivatedRoute: ActivatedRoute,
     private _AuthService: AuthService,
-    private _ServicesService: ServicesService
+    private _ServicesService: ServicesService,
+    private _MessageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -109,7 +114,6 @@ export class PavilionCountryComponent implements OnInit {
   getPavilionByCountry(country: string) {
     this._ServicesService.getPavilionByCountry(country).subscribe({
       next: (res) => {
-        console.log(res);
         this.pavilion = res.existPavilion;
       },
       error: (error) => {
@@ -121,7 +125,6 @@ export class PavilionCountryComponent implements OnInit {
   getAllPavilionsReviews() {
     this._ServicesService.getPavilionReviews(this.country).subscribe({
       next: (res) => {
-        console.log(res);
         this.reviews = res.pavilionReviews;
       },
       error: (error) => {
@@ -141,11 +144,20 @@ export class PavilionCountryComponent implements OnInit {
         })
         .subscribe({
           next: (res) => {
-            console.log(res);
+            this._MessageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: res.message,
+            });
             this.getAllPavilionsReviews();
           },
           error: (error) => {
             console.log(error);
+            this._MessageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: error.error.message,
+            });
           },
         });
 
