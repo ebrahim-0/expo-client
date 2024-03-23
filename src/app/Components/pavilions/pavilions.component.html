@@ -1,11 +1,8 @@
 <section
-  [ngClass]="{
-    'h-[calc(100vh-98px)]': action|| currentUser.value.rule !== 'employee',
-  }"
-  class="bg-[#082A3D] overlay py-9 flex flex-col justify-center items-center"
+  class="bg-[#082A3D] overlay py-9 min-h-screen flex flex-col justify-center items-center"
 >
   <div
-    class="text-lg font-bold max-w-[805px] text-[#FFFFFF] rounded-2xl p-20 mx-32 text-center border bg-[#0E2431]"
+    class="text-lg font-bold max-w-[805px] text-[#FFFFFF] rounded-2xl p-8 md:p-20 mx-4 md:mx-32 text-center border bg-[#0E2431]"
   >
     @if(currentUser.value.rule == 'employee'){ @if(action){
 
@@ -105,7 +102,7 @@
             ></i>
             <i
               (click)="editPavilion(pavilion)"
-              class="ml-4 cursor-pointer pi pi-file-edit"
+              class="cursor-pointer md:ml-4 pi pi-file-edit"
               style="color: blue"
             ></i>
           </td>
@@ -140,17 +137,6 @@
     </button>
     } } @else {
     <h1 class="mb-16">Pavilions</h1>
-
-    <!-- <div class="grid grid-cols-1 mx-auto md:grid-cols-2 lg:grid-cols-3 gap-7">
-      @for (pavilion of pavilionsCountries; track $index) {
-
-      <div class="bg-[#C0C6CA] rounded-2xl p-3 text-white">
-        <a [routerLink]="['/pavilions', pavilion.path]" class="text-center">{{
-          pavilion.country
-        }}</a>
-      </div>
-      }
-    </div> -->
 
     <div class="grid grid-cols-1 mx-auto md:grid-cols-2 lg:grid-cols-3 gap-7">
       @for(pavilion of pavilions; track $index){

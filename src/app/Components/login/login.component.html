@@ -15,7 +15,7 @@
   </h1>
 
   <form
-    class="flex flex-col w-full max-w-2xl gap-7"
+    class="flex flex-col w-full max-w-2xl p-3 gap-7"
     (ngSubmit)="handleLogin(loginForm)"
     [formGroup]="loginForm"
   >
@@ -94,7 +94,9 @@
 
   } @else {
   <h1 class="text-4xl text-center text-white">Login</h1>
-  <div class="flex items-center justify-center mt-16 gap-28">
+  <div
+    class="flex flex-col items-center justify-center mt-16 md:flex-row gap-9 md:gap-28"
+  >
     <button
       pButton
       label="Visitors"

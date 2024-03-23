@@ -1,6 +1,6 @@
 <section class="bg-[#082A3D] min-h-[calc(100vh-98px)] overlay py-7">
   <div
-    class="text-lg font-bold text-[#FFFFFF] rounded-2xl p-9 md:p-[70px] mx-9 md:mx-32 text-center border bg-[#0E2431]"
+    class="text-lg font-bold max-w-[805px] text-[#FFFFFF] rounded-2xl p-8 md:p-20 mx-4 md:mx-32 text-center border bg-[#0E2431]"
   >
     <!-- [ngClass]="{
     'h-[calc(100vh-98px)]': action|| currentUser.value.rule !== 'employee',
@@ -142,7 +142,7 @@
             ></i>
             <i
               (click)="editFacility(facility)"
-              class="ml-4 cursor-pointer pi pi-file-edit"
+              class="cursor-pointer md:ml-4 pi pi-file-edit"
               style="color: blue"
             ></i>
           </td>
@@ -176,14 +176,14 @@
     <h1 class="mb-16">Facilities</h1>
 
     <h3>Restaurants</h3>
-    <div class="flex justify-center my-9 gap-36">
+    <div class="flex flex-col justify-center md:flex-row my-9 gap-9 md:gap-36">
       <div
-        class="w-[350px] h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
+        class="md:w-[350px] md:h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
       >
         <img src="assets/mac.png" width="170" alt="restaurant" />
       </div>
       <div
-        class="w-[350px] h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
+        class="md:w-[350px] md:h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
       >
         <img src="assets/kfc.png" width="170" alt="restaurant" />
       </div>
@@ -191,28 +191,28 @@
 
     <h3>Coffee</h3>
 
-    <div class="flex justify-center my-9 gap-36">
+    <div class="flex flex-col justify-center md:flex-row my-9 gap-9 md:gap-36">
       <div
-        class="w-[350px] h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
+        class="md:w-[350px] md:h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
       >
         <img src="assets/starbucks.png" width="170" alt="restaurant" />
       </div>
       <div
-        class="w-[350px] h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
+        class="md:w-[350px] md:h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
       >
         <img src="assets/tim.png" width="170" alt="restaurant" />
       </div>
     </div>
 
     <h3>General facilities</h3>
-    <div class="flex justify-center my-9 gap-36">
+    <div class="flex flex-col justify-center md:flex-row my-9 gap-9 md:gap-36">
       <div
-        class="w-[350px] h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
+        class="md:w-[350px] md:h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
       >
         <img src="assets/wc.png" width="170" alt="restaurant" />
       </div>
       <div
-        class="w-[350px] h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
+        class="md:w-[350px] md:h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
       >
         <img src="assets/mosque.png" width="130" alt="restaurant" />
       </div>
