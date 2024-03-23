@@ -11,6 +11,7 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { AuthService } from '../../Services/auth.service';
 import { ServicesService } from '../../Services/services.service';
+import { MessageModule } from 'primeng/message';
 
 @Component({
   selector: 'app-pavilion-country',
@@ -20,6 +21,7 @@ import { ServicesService } from '../../Services/services.service';
     ButtonModule,
     DialogModule,
     InputTextareaModule,
+    MessageModule,
   ],
   templateUrl: './pavilion-country.component.html',
   styleUrl: './pavilion-country.component.css',
