@@ -39,3 +39,26 @@ input:-webkit-autofill,
 input:-webkit-autofill:focus {
   transition: background-color 0s 600000s, color 0s 600000s !important;
 }
+
+.overlay,
+.img {
+  position: relative;
+  background-image: url("./assets/bottom-left.jpg");
+  background-attachment: fixed;
+  z-index: 30;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.overlay::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  opacity: 0.25;
+  z-index: -1;
+}

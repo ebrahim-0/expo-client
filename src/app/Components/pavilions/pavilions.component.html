@@ -1,14 +1,13 @@
 <section
-  [ngClass]="{ 'h-[calc(100vh-98px)]': action }"
-  class="bg-[#082A3D] relative py-9 bg-no-repeat bg-cover bg-center bg-fixed z-30 flex flex-col justify-center items-center"
-  style="background-image: url(../../../assets/bottom-left.jpg)"
+  [ngClass]="{
+    'h-[calc(100vh-98px)]': action|| currentUser.value.rule !== 'employee',
+  }"
+  class="bg-[#082A3D] overlay py-9 flex flex-col justify-center items-center"
 >
-  <div class="absolute top-0 w-full h-full bg-white opacity-25"></div>
-
   <div
-    class="relative z-40 text-lg font-bold h-fit text-[#FFFFFF] rounded-2xl p-9 md:p-20 mx-9 md:mx-32 text-center border bg-[#0E2431]"
+    class="text-lg font-bold max-w-[805px] text-[#FFFFFF] rounded-2xl p-20 mx-32 text-center border bg-[#0E2431]"
   >
-    @if(action){
+    @if(currentUser.value.rule == 'employee'){ @if(action){
 
     <h1 class="mb-8">New Pavilions</h1>
 
@@ -139,6 +138,30 @@
 
       } Add Pavilion
     </button>
+    } } @else {
+    <h1 class="mb-16">Pavilions</h1>
+
+    <!-- <div class="grid grid-cols-1 mx-auto md:grid-cols-2 lg:grid-cols-3 gap-7">
+      @for (pavilion of pavilionsCountries; track $index) {
+
+      <div class="bg-[#C0C6CA] rounded-2xl p-3 text-white">
+        <a [routerLink]="['/pavilions', pavilion.path]" class="text-center">{{
+          pavilion.country
+        }}</a>
+      </div>
+      }
+    </div> -->
+
+    <div class="grid grid-cols-1 mx-auto md:grid-cols-2 lg:grid-cols-3 gap-7">
+      @for(pavilion of pavilions; track $index){
+      <div class="bg-[#C0C6CA] rounded-2xl p-3 text-white">
+        <a [routerLink]="['/pavilions', pavilion.name]" class="text-center">{{
+          pavilion.name
+        }}</a>
+      </div>
+      }
+    </div>
+
     }
   </div>
 </section>

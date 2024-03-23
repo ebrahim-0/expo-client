@@ -78,6 +78,22 @@ export const routes: Routes = [
         (m) => m.PavilionsComponent
       ),
   },
+  {
+    path: 'pavilions/:country',
+    canActivate: [pageGuard],
+    loadComponent: () =>
+      import('./Components/pavilion-country/pavilion-country.component').then(
+        (m) => m.PavilionCountryComponent
+      ),
+  },
+  {
+    path: 'facilities',
+    canActivate: [pageGuard],
+    loadComponent: () =>
+      import('./Components/facilities/facilities.component').then(
+        (m) => m.FacilitiesComponent
+      ),
+  },
 
   {
     path: 'about-us',

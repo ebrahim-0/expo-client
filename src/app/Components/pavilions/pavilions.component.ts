@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { ServicesService } from '../../Services/services.service';
 import { ButtonModule } from 'primeng/button';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
 import {
@@ -16,11 +16,13 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-pavilions',
   standalone: true,
   imports: [
+    RouterModule,
     TableModule,
     ButtonModule,
     FloatLabelModule,
@@ -42,7 +44,19 @@ export class PavilionsComponent implements OnInit {
 
   action: string = '';
 
+  pavilionsCountries: any[] = [
+    {
+      country: 'Kingdom of Saudi Arabia',
+      path: 'ksa',
+    },
+    { country: 'United Arab Emirates', path: 'uae' },
+    { country: 'Japan', path: 'japan' },
+    { country: 'Italy', path: 'italy' },
+    { country: 'China', path: 'china' },
+  ];
+
   loading: boolean = false;
+  currentUser: any;
 
   pavilionForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -53,7 +67,8 @@ export class PavilionsComponent implements OnInit {
     private _ServicesService: ServicesService,
     private _Router: Router,
     private _ActivatedRoute: ActivatedRoute,
-    private _MessageService: MessageService
+    private _MessageService: MessageService,
+    private _AuthService: AuthService
   ) {}
   ngOnInit(): void {
     this._ActivatedRoute.queryParams.subscribe((params) => {
@@ -62,16 +77,26 @@ export class PavilionsComponent implements OnInit {
       if (!this.action) {
         this.getAllPavilions();
       } else {
-        if (this.pavilion) {
-          this.pavilionForm.patchValue({
-            name: this.pavilion.name,
-            description: this.pavilion.description,
-          });
+        if (this._AuthService.currentUser.value?.rule === 'employee') {
+          if (this.pavilion) {
+            this.pavilionForm.patchValue({
+              name: this.pavilion.name,
+              description: this.pavilion.description,
+            });
+          }
         }
+      }
+
+      if (this._AuthService.currentUser.value?.rule === 'admin') {
+        this._Router.navigate(['/']);
+      }
+
+      if (this._AuthService.currentUser.value?.rule === 'visitor') {
+        this._Router.navigate(['/pavilions']);
       }
     });
 
-    // this.getAllPavilions();
+    this.currentUser = this._AuthService.currentUser;
   }
 
   submitAddPavilion(pavilionForm: FormGroup) {
@@ -165,36 +190,57 @@ export class PavilionsComponent implements OnInit {
   }
 
   editPavilion(pavilion: any) {
-    this.pavilion = pavilion;
-
-    console.log(this.pavilion);
-
-    this._Router.navigate(['/pavilions'], { queryParams: { action: 'add' } });
+    if (this._AuthService.currentUser.value?.rule !== 'employee') {
+      this._MessageService.add({
+        severity: 'info',
+        summary: 'Info',
+        detail: 'You are not allowed to edit pavilions',
+      });
+    } else {
+      this.pavilion = pavilion;
+      this._Router.navigate(['/pavilions'], { queryParams: { action: 'add' } });
+    }
   }
 
   addPavilion() {
-    this._Router.navigate(['/pavilions'], { queryParams: { action: 'add' } });
+    if (this._AuthService.currentUser.value?.rule !== 'employee') {
+      this._MessageService.add({
+        severity: 'info',
+        summary: 'Info',
+        detail: 'You are not allowed to add pavilions',
+      });
+    } else {
+      this._Router.navigate(['/pavilions'], { queryParams: { action: 'add' } });
+    }
   }
 
   deletePavilion(id: string) {
-    this._ServicesService.deletePavilion(id).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.getAllPavilions();
-        this._MessageService.add({
-          severity: 'info',
-          summary: 'Info',
-          detail: res.message,
-        });
-      },
-      error: (error) => {
-        console.error(error);
-        this._MessageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: error.error.message,
-        });
-      },
-    });
+    if (this._AuthService.currentUser.value?.rule !== 'employee') {
+      this._MessageService.add({
+        severity: 'info',
+        summary: 'Info',
+        detail: 'You are not allowed to delete pavilions',
+      });
+    } else {
+      this._ServicesService.deletePavilion(id).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.getAllPavilions();
+          this._MessageService.add({
+            severity: 'info',
+            summary: 'Info',
+            detail: res.message,
+          });
+        },
+        error: (error) => {
+          console.error(error);
+          this._MessageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: error.error.message,
+          });
+        },
+      });
+    }
   }
 }

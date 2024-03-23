@@ -1,0 +1,224 @@
+<section class="bg-[#082A3D] min-h-[calc(100vh-98px)] overlay py-7">
+  <div
+    class="text-lg font-bold text-[#FFFFFF] rounded-2xl p-9 md:p-[70px] mx-9 md:mx-32 text-center border bg-[#0E2431]"
+  >
+    <!-- [ngClass]="{
+    'h-[calc(100vh-98px)]': action|| currentUser.value.rule !== 'employee',
+  }" -->
+
+    @if(currentUser.value.rule == 'employee'){ @if(action){
+
+    <h1 class="mb-8">@if(facility?.id){ Update } @else { new } Facility</h1>
+
+    <form
+      [formGroup]="facilitiesForm"
+      (ngSubmit)="submitAddFacility(facilitiesForm)"
+      class="w-full mx-auto"
+    >
+      <div
+        class="grid items-center justify-center grid-cols-1 lg:grid-cols-2 gap-7"
+      >
+        <div class="relative flex flex-col pt-2">
+          <p-floatLabel>
+            <input id="name" type="text" pInputText formControlName="name" />
+            <label for="name">Name</label>
+          </p-floatLabel>
+
+          @if(facilitiesForm.get('name')?.invalid &&
+          facilitiesForm.get('name')?.touched){
+          @if(facilitiesForm.get('name')?.getError('required')){
+
+          <p-message severity="error" text="name is required"></p-message>
+
+          } }
+        </div>
+
+        <!-- <div class="relative flex flex-col pt-2">
+          <p-floatLabel>
+            <input id="id" type="text" pInputText formControlName="id" />
+            <label for="id">ID</label>
+          </p-floatLabel>
+
+          @if(facilitiesForm.get('id')?.invalid &&
+          facilitiesForm.get('id')?.touched){
+          @if(facilitiesForm.get('id')?.getError('required')){
+
+          <p-message severity="error" text="id is required"></p-message>
+
+          } }
+        </div> -->
+
+        <div class="relative flex flex-col pt-2">
+          <p-floatLabel>
+            <p-dropdown
+              formControlName="type"
+              styleClass="w-full bg-transparent text-start border-0 border-b-2 border-white rounded-none text-white shadow-none"
+              [options]="types"
+              placeholder="Type"
+              id="'types"
+            ></p-dropdown>
+            <label for="types">Type</label>
+          </p-floatLabel>
+
+          @if(facilitiesForm.get('type')?.invalid &&
+          facilitiesForm.get('type')?.touched){
+          @if(facilitiesForm.get('type')?.getError('required')){
+
+          <p-message severity="error" text="type is required"></p-message>
+
+          } }
+        </div>
+
+        <div class="relative flex flex-col pt-4">
+          <p-floatLabel>
+            <input
+              id="description"
+              type="text"
+              pInputText
+              formControlName="description"
+            />
+            <label for="description">Description</label>
+          </p-floatLabel>
+
+          @if(facilitiesForm.get('description')?.invalid &&
+          facilitiesForm.get('description')?.touched){
+          @if(facilitiesForm.get('description')?.getError('required')){
+
+          <p-message
+            severity="error"
+            text="description is required"
+          ></p-message>
+
+          } }
+        </div>
+      </div>
+      <button
+        type="submit"
+        pButton
+        pRipple
+        class="flex items-center justify-center mx-auto text-white bg-gray-400 border-0 mt-7 gap-7 p-button-info w-fit"
+      >
+        @if(loading){
+        <p-progressSpinner
+          styleClass="w-5 h-5"
+          strokeWidth="8"
+          ariaLabel="loading"
+          fill="transparent"
+          animationDuration="1s"
+        ></p-progressSpinner>
+
+        } @if(facility?.id){ Update } @else { Add }
+      </button>
+    </form>
+
+    } @else {
+    <h1 class="mb-16">Facilities</h1>
+    @if(facilities.length){
+
+    <p-table
+      styleClass="h-fit mb-7"
+      tableStyleClass="w-[15rem] md:w-[30rem] lg:w-[45rem] mx-auto"
+      responsiveLayout="scroll"
+      [value]="facilities"
+      [scrollable]="true"
+      scrollHeight="flex"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>ID</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-facility>
+        <tr>
+          <td>{{ facility.name }}</td>
+          <td>{{ facility.id }}</td>
+          <td>
+            <i
+              (click)="deleteFacility(facility.id)"
+              class="cursor-pointer pi pi-trash"
+              style="color: red"
+            ></i>
+            <i
+              (click)="editFacility(facility)"
+              class="ml-4 cursor-pointer pi pi-file-edit"
+              style="color: blue"
+            ></i>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    }
+
+    <button
+      type="button"
+      pButton
+      pRipple
+      (click)="addFacility()"
+      class="flex items-center gap-3 mx-auto text-white bg-gray-400 border-0 p-button-info w-fit"
+    >
+      @if(loading){
+      <p-progressSpinner
+        styleClass="w-5 h-5"
+        strokeWidth="8"
+        ariaLabel="loading"
+        fill="transparent"
+        animationDuration="1s"
+      ></p-progressSpinner>
+
+      } Add Facility
+    </button>
+
+    } } @else {
+
+    <h1 class="mb-16">Facilities</h1>
+
+    <h3>Restaurants</h3>
+    <div class="flex justify-center my-9 gap-36">
+      <div
+        class="w-[350px] h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
+      >
+        <img src="assets/mac.png" width="170" alt="restaurant" />
+      </div>
+      <div
+        class="w-[350px] h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
+      >
+        <img src="assets/kfc.png" width="170" alt="restaurant" />
+      </div>
+    </div>
+
+    <h3>Coffee</h3>
+
+    <div class="flex justify-center my-9 gap-36">
+      <div
+        class="w-[350px] h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
+      >
+        <img src="assets/starbucks.png" width="170" alt="restaurant" />
+      </div>
+      <div
+        class="w-[350px] h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
+      >
+        <img src="assets/tim.png" width="170" alt="restaurant" />
+      </div>
+    </div>
+
+    <h3>General facilities</h3>
+    <div class="flex justify-center my-9 gap-36">
+      <div
+        class="w-[350px] h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
+      >
+        <img src="assets/wc.png" width="170" alt="restaurant" />
+      </div>
+      <div
+        class="w-[350px] h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
+      >
+        <img src="assets/mosque.png" width="130" alt="restaurant" />
+      </div>
+    </div>
+    }
+  </div>
+</section>
+
+<p-toast></p-toast>

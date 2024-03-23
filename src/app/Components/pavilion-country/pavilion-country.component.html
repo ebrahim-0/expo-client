@@ -1,0 +1,120 @@
+<section
+  class="bg-[#082A3D] overlay py-9 flex flex-col justify-center items-center"
+>
+  <div
+    class="text-lg max-w-[805px] min-w-fit text-[#FFFFFF] rounded-2xl p-4 md:p-20 mx-4 md:mx-32 border bg-[#0E2431]"
+  >
+    <h1 class="text-center md:text-6xl mb-9">
+      {{ pavilion?.name }}
+    </h1>
+    <h4 class="mb-7">About the Pavilion</h4>
+    <p class="leading-10">
+      {{ pavilion?.description }}
+    </p>
+
+    <button
+      type="button"
+      pButton
+      pRipple
+      (click)="showDialog()"
+      class="flex items-center gap-3 mx-auto my-4 text-white bg-gray-400 border-0 p-button-info w-fit"
+    >
+      Show Time
+    </button>
+
+    <p-dialog
+      header=""
+      [(visible)]="visible"
+      [modal]="true"
+      [style]="{ width: '50rem' }"
+      [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    >
+      <h2 class="">Ardha</h2>
+      <p>8:00 – 8:15PM</p>
+      <ng-template pTemplate="footer">
+        <button
+          type="button"
+          pButton
+          pRipple
+          (click)="visible = false"
+          class="flex items-center gap-3 mx-auto my-4 text-white bg-gray-400 border-0 p-button-info w-fit"
+        >
+          OK
+        </button>
+      </ng-template>
+    </p-dialog>
+  </div>
+
+  <div
+    class="text-lg h-fit mt-9 text-[#FFFFFF] rounded-2xl p-9 md:p-20 mx-9 md:mx-32 border bg-[#0E2431] flex items-center gap-20"
+  >
+    <h3>Reviews</h3>
+    <div
+      class="bg-[#D9D9D9] text-[#0E2431] border rounded-md md:w-[400px] lg:w-[670px] xl:w-[905px]"
+    >
+      @for (review of reviews.comments; track $index) {
+
+      <div class="p-4 border-b-2">
+        <p>{{ review.comment }}</p>
+        <h4 class="text-lg capitalize">
+          <i class="pi pi-user"></i>
+
+          {{ review.author }}
+        </h4>
+      </div>
+
+      } @empty {
+      <div class="p-4 border-b-2">
+        <p>No reviews yet</p>
+      </div>
+      }
+
+      <button
+        type="button"
+        pButton
+        pRipple
+        (click)="showAddComment()"
+        class="flex items-center gap-3 mx-auto my-4 text-white bg-gray-400 border-0 p-button-info w-fit"
+      >
+        Write a Review
+      </button>
+
+      <p-dialog [modal]="true" [(visible)]="visibleComment">
+        <ng-template pTemplate="headless">
+          <form
+            [formGroup]="commentForm"
+            (ngSubmit)="addComment(commentForm)"
+            class="flex flex-col gap-4 px-8 py-5 bg-[#082A3D]"
+            style="border-radius: 12px"
+          >
+            <div class="inline-flex flex-col gap-2">
+              <label for="comment" class="font-semibold text-blue-50"
+                >Comment</label
+              >
+
+              <textarea
+                rows="5"
+                cols="30"
+                id="comment"
+                class="p-3 border-none bg-white/20 text-blue-50"
+                pInputTextarea
+                formControlName="comment"
+              ></textarea>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button
+                type="submit"
+                pButton
+                pRipple
+                class="w-fit bg-[#FF0A0A] border text-blue-50 border-white/30 hover:bg-white/10"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </ng-template>
+      </p-dialog>
+    </div>
+  </div>
+</section>
