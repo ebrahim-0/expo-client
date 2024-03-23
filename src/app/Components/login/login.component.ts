@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
           next: (res) => {
             this.loading = false;
 
-            this._CookieService.set('token', res.token);
+            this._CookieService.set('token', res.token, { expires: 2 });
 
             this._AuthService.currentUser.next(res.user);
             this._MessageService.add({
