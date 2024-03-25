@@ -181,7 +181,6 @@ export class ShowTimeComponent implements OnInit {
   getAllShowTime() {
     this._ServicesService.getAllShowTime().subscribe({
       next: (res) => {
-        console.log(res);
         this.showTimes = res.showTimes;
       },
       error: (error) => {
