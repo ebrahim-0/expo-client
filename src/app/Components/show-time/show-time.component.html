@@ -1,0 +1,157 @@
+<section class="bg-[#082A3D] min-h-[calc(100vh-98px)] overlay py-7">
+  <div
+    class="text-lg font-bold max-w-[805px] text-[#FFFFFF] rounded-2xl p-8 md:p-20 mx-4 md:mx-auto text-center border bg-[#0E2431]"
+  >
+    @if(currentUser.value.rule == 'employee'){ @if(action){
+    <h1 class="mb-8">@if(showTime?.pavilionId){ Update } @else { New } Show</h1>
+
+    <form
+      [formGroup]="showTimeForm"
+      (ngSubmit)="submitAddShowTime(showTimeForm)"
+      class="w-full mx-auto"
+    >
+      <div
+        class="grid items-center justify-center grid-cols-1 lg:grid-cols-2 gap-7"
+      >
+        <div class="relative flex flex-col pt-2">
+          <p-floatLabel>
+            <input id="name" type="text" pInputText formControlName="name" />
+            <label for="name">Name</label>
+          </p-floatLabel>
+
+          @if(showTimeForm.get('name')?.invalid &&
+          showTimeForm.get('name')?.touched){
+          @if(showTimeForm.get('name')?.getError('required')){
+
+          <p-message severity="error" text="name is required"></p-message>
+
+          } }
+        </div>
+
+        <div class="relative flex flex-col pt-2">
+          <p-floatLabel>
+            <input
+              id="pavilionid"
+              type="text"
+              pInputText
+              formControlName="pavilionId"
+            />
+            <label for="pavilionid">Pavilion ID</label>
+          </p-floatLabel>
+
+          @if(showTimeForm.get('pavilionId')?.invalid &&
+          showTimeForm.get('pavilionId')?.touched){
+          @if(showTimeForm.get('pavilionId')?.getError('required')){
+
+          <p-message severity="error" text="pavilionId is required"></p-message>
+
+          } }
+        </div>
+
+        <div class="relative flex flex-col pt-4">
+          <p-floatLabel>
+            <input id="time" type="text" pInputText formControlName="time" />
+            <label for="time">Time</label>
+          </p-floatLabel>
+
+          @if(showTimeForm.get('time')?.invalid &&
+          showTimeForm.get('time')?.touched){
+          @if(showTimeForm.get('time')?.getError('required')){
+
+          <p-message severity="error" text="time is required"></p-message>
+
+          } }
+        </div>
+      </div>
+      <button
+        type="submit"
+        pButton
+        pRipple
+        class="flex items-center justify-center mx-auto text-white bg-gray-400 border-0 mt-7 gap-7 p-button-info w-fit"
+      >
+        @if(loading){
+        <p-progressSpinner
+          styleClass="w-5 h-5"
+          strokeWidth="8"
+          ariaLabel="loading"
+          fill="transparent"
+          animationDuration="1s"
+        ></p-progressSpinner>
+
+        } @if(showTime?.pavilionId){ Update } @else { Add } Show
+      </button>
+    </form>
+
+    } @else {
+    <h1 class="mb-16">Show Times</h1>
+    @if(showTimes.length){
+
+    <p-table
+      styleClass="h-fit mb-7"
+      tableStyleClass="w-[15rem] md:w-[30rem] lg:w-[45rem] mx-auto"
+      responsiveLayout="scroll"
+      [value]="showTimes"
+      [scrollable]="true"
+      scrollHeight="flex"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Pavilion Id</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-showTime>
+        <tr>
+          <td>{{ showTime.name }}</td>
+          <td>{{ showTime.pavilionId }}</td>
+          <td>
+            <i
+              (click)="deleteShowTime(showTime._id)"
+              class="cursor-pointer pi pi-trash"
+              style="color: red"
+            ></i>
+            <i
+              (click)="editShowTime(showTime)"
+              class="cursor-pointer md:ml-4 pi pi-file-edit"
+              style="color: blue"
+            ></i>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    } @else {
+    <div class="text-center my-3 bg-[#0E2431] rounded-2xl">
+      <p>No show times found</p>
+    </div>
+    }
+
+    <button
+      type="button"
+      pButton
+      pRipple
+      (click)="addShowTime()"
+      class="flex items-center gap-3 mx-auto text-white bg-gray-400 border-0 p-button-info w-fit"
+    >
+      @if(loading){
+      <p-progressSpinner
+        styleClass="w-5 h-5"
+        strokeWidth="8"
+        ariaLabel="loading"
+        fill="transparent"
+        animationDuration="1s"
+      ></p-progressSpinner>
+
+      } Add Show Time
+    </button>
+
+    } } @else {
+
+    <h1 class="mb-8">Show Time Visitor</h1>
+
+    }
+  </div>
+</section>
+
+<p-toast></p-toast>

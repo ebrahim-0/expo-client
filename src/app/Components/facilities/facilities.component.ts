@@ -77,6 +77,11 @@ export class FacilitiesComponent implements OnInit {
           });
         }
       }
+
+      if (this.action === 'add') {
+        this.facility = {};
+        this.facilitiesForm.reset();
+      }
     });
 
     this.currentUser = this._AuthService.currentUser;
@@ -112,7 +117,7 @@ export class FacilitiesComponent implements OnInit {
     } else {
       this.facility = facility;
       this._Router.navigate(['/facilities'], {
-        queryParams: { action: 'add' },
+        queryParams: { action: 'update' },
       });
     }
   }

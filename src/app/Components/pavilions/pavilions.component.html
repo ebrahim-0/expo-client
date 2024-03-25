@@ -6,10 +6,10 @@
   >
     @if(currentUser.value.rule == 'employee'){ @if(action){
 
-    <h1 class="mb-8">New Pavilions</h1>
+    <h1 class="mb-8">@if(pavilion?.id){ Update } @else { New } Pavilion</h1>
 
     <form
-      class="w-[15rem] md:w-[30rem] lg:w-[45rem] mx-auto"
+      class="w-[15rem] md:w-[30rem] lg:w-[40rem] mx-auto"
       [formGroup]="pavilionForm"
       (ngSubmit)="submitAddPavilion(pavilionForm)"
     >
@@ -110,9 +110,7 @@
       </ng-template>
     </p-table>
     } @else {
-    <div
-      class="flex justify-center items-center h-[5rem] w-[15rem] md:w-[30rem] lg:w-[45rem] mx-auto bg-[#0E2431] rounded-2xl"
-    >
+    <div class="text-center my-3 bg-[#0E2431] rounded-2xl">
       <p>No pavilions found</p>
     </div>
     }

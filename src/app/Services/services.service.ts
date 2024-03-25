@@ -77,4 +77,28 @@ export class ServicesService {
       facility
     );
   }
+
+  addShowTime(showTime: object): Observable<any> {
+    return this._HttpClient.post(
+      `${this.API_URL}/api/v1/user/addShowTime`,
+      showTime
+    );
+  }
+
+  deleteShowTime(id: string): Observable<any> {
+    return this._HttpClient.delete(
+      `${this.API_URL}/api/v1/user/deleteShowTime/${id}`
+    );
+  }
+
+  updateShowTime(id: string, showTime: object): Observable<any> {
+    return this._HttpClient.put(
+      `${this.API_URL}/api/v1/user/updateShowTime/${id}`,
+      showTime
+    );
+  }
+
+  getAllShowTime(): Observable<any> {
+    return this._HttpClient.get(`${this.API_URL}/api/v1/user/getAllShowTimes`);
+  }
 }

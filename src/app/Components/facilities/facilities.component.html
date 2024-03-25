@@ -1,11 +1,7 @@
 <section class="bg-[#082A3D] min-h-[calc(100vh-98px)] overlay py-7">
   <div
-    class="text-lg font-bold max-w-[805px] text-[#FFFFFF] rounded-2xl p-8 md:p-20 mx-4 md:mx-32 text-center border bg-[#0E2431]"
+    class="text-lg font-bold max-w-[805px] text-[#FFFFFF] rounded-2xl p-8 md:p-20 mx-4 md:mx-auto text-center border bg-[#0E2431]"
   >
-    <!-- [ngClass]="{
-    'h-[calc(100vh-98px)]': action|| currentUser.value.rule !== 'employee',
-  }" -->
-
     @if(currentUser.value.rule == 'employee'){ @if(action){
 
     <h1 class="mb-8">@if(facility?.id){ Update } @else { new } Facility</h1>

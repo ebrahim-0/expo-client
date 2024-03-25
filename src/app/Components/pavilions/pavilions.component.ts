@@ -87,6 +87,11 @@ export class PavilionsComponent implements OnInit {
         }
       }
 
+      if (this.action === 'add') {
+        this.pavilion = {};
+        this.pavilionForm.reset();
+      }
+
       if (this._AuthService.currentUser.value?.rule === 'admin') {
         this._Router.navigate(['/']);
       }
@@ -194,7 +199,9 @@ export class PavilionsComponent implements OnInit {
       });
     } else {
       this.pavilion = pavilion;
-      this._Router.navigate(['/pavilions'], { queryParams: { action: 'add' } });
+      this._Router.navigate(['/pavilions'], {
+        queryParams: { action: 'update' },
+      });
     }
   }
 

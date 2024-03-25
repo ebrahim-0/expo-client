@@ -94,6 +94,14 @@ export const routes: Routes = [
         (m) => m.FacilitiesComponent
       ),
   },
+  {
+    path: 'show-time',
+    canActivate: [pageGuard],
+    loadComponent: () =>
+      import('./Components/show-time/show-time.component').then(
+        (m) => m.ShowTimeComponent
+      ),
+  },
 
   {
     path: 'about-us',
