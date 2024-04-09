@@ -95,11 +95,43 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'saudi-vr',
+    canActivate: [pageGuard],
+    loadComponent: () =>
+      import('./Components/vr/vr.component').then((m) => m.VRComponent),
+  },
+  {
     path: 'show-time',
     canActivate: [pageGuard],
     loadComponent: () =>
       import('./Components/show-time/show-time.component').then(
         (m) => m.ShowTimeComponent
+      ),
+  },
+  {
+    path: 'ticket',
+    canActivate: [pageGuard],
+    loadComponent: () =>
+      import('./Components/ticket/ticket.component').then(
+        (m) => m.TicketComponent
+      ),
+  },
+
+  {
+    path: 'ticket/book-ticket',
+    canActivate: [pageGuard],
+    loadComponent: () =>
+      import('./Components/book-ticket/book-ticket.component').then(
+        (m) => m.BookTicketComponent
+      ),
+  },
+
+  {
+    path: 'ticket/view-ticket',
+    canActivate: [pageGuard],
+    loadComponent: () =>
+      import('./Components/view-ticket/view-ticket.component').then(
+        (m) => m.ViewTicketComponent
       ),
   },
 

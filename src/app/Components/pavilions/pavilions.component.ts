@@ -17,6 +17,7 @@ import { MessageService } from 'primeng/api';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../Services/auth.service';
+import { FooterContactComponent } from '../footer-contact/footer-contact.component';
 
 @Component({
   selector: 'app-pavilions',
@@ -32,6 +33,7 @@ import { AuthService } from '../../Services/auth.service';
     ToastModule,
     ProgressSpinnerModule,
     CommonModule,
+    FooterContactComponent,
   ],
   templateUrl: './pavilions.component.html',
   styleUrl: './pavilions.component.css',

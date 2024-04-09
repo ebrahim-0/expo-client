@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
@@ -19,6 +19,7 @@ import { ToastModule } from 'primeng/toast';
   selector: 'app-pavilion-country',
   standalone: true,
   imports: [
+    RouterModule,
     ReactiveFormsModule,
     ButtonModule,
     DialogModule,

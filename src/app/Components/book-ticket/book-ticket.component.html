@@ -1,0 +1,104 @@
+<section
+  class="bg-[#082A3D] overlay py-9 flex flex-col justify-center items-center"
+>
+  <div
+    class="text-lg font-bold max-w-[805px] text-[#FFFFFF] rounded-2xl p-8 md:p-20 mx-4 md:mx-32 text-center border bg-[#0E2431]"
+  >
+    <h1 class="mb-8">Book Tickets</h1>
+    <h3 class="my-4 text-start">Date</h3>
+    <h3 class="my-4 text-start">Type of Ticket</h3>
+
+    <div>
+      <div class="flex flex-col justify-center gap-7">
+        <div
+          class="bg-[#F5F5F5]/70 text-[#082A3D] gap-5 flex flex-col md:flex-row justify-center md:justify-between p-4 px-14 rounded-md"
+        >
+          <h3 style="flex-basis: 33.33%">Entrance ticket</h3>
+          <div class="flex justify-center gap-4">
+            <span class="px-2 border border-black rounded">50</span>
+            <span>S.R</span>
+          </div>
+          <div class="flex items-center justify-center gap-5">
+            <i
+              class="text-2xl cursor-pointer pi pi-minus-circle"
+              (click)="decrementTicket(0)"
+            ></i>
+            <span>
+              {{ tickets[0].quantity }}
+            </span>
+            <i
+              class="text-2xl cursor-pointer pi pi-plus-circle"
+              (click)="incrementTicket(0)"
+            ></i>
+          </div>
+        </div>
+        <div
+          class="bg-[#F5F5F5]/70 text-[#082A3D] gap-5 flex flex-col md:flex-row justify-center md:justify-between p-4 px-14 rounded-md"
+        >
+          <h3 style="flex-basis: 35.33%">Vip ticket</h3>
+          <div class="flex justify-center gap-4">
+            <span class="px-2 border border-black rounded">100</span>
+            <span>S.R</span>
+          </div>
+          <div class="flex items-center justify-center gap-5">
+            <i
+              class="text-2xl cursor-pointer pi pi-minus-circle"
+              (click)="decrementTicket(1)"
+            ></i>
+            <span>
+              {{ tickets[1].quantity }}
+            </span>
+            <i
+              class="text-2xl cursor-pointer pi pi-plus-circle"
+              (click)="incrementTicket(1)"
+            ></i>
+          </div>
+        </div>
+        <div
+          class="bg-[#F5F5F5]/70 text-[#082A3D] gap-5 flex flex-col md:flex-row justify-center md:justify-between items-center p-4 px-14 rounded-md"
+        >
+          <h3 style="flex-basis: 33.33%">Children's ticket Under 3 years</h3>
+          <div class="flex justify-center gap-4">
+            <span class="px-2 border border-black rounded">25</span>
+            <span>S.R</span>
+          </div>
+          <div class="flex items-center justify-center gap-5">
+            <i
+              class="text-2xl cursor-pointer pi pi-minus-circle"
+              (click)="decrementTicket(2)"
+            ></i>
+            <span>
+              {{ tickets[2].quantity }}
+            </span>
+            <i
+              class="text-2xl cursor-pointer pi pi-plus-circle"
+              (click)="incrementTicket(2)"
+            ></i>
+          </div>
+        </div>
+
+        <button
+          (click)="submitBookTicket()"
+          pButton
+          pRipple
+          class="flex items-center gap-3 mx-auto text-white bg-gray-400 border-0 p-button-info w-fit"
+        >
+          @if(loading){
+          <p-progressSpinner
+            styleClass="w-5 h-5"
+            strokeWidth="8"
+            ariaLabel="loading"
+            fill="transparent"
+            animationDuration="1s"
+          ></p-progressSpinner>
+
+          } @if(isATicket){ Update Ticket } @else { Book Ticket }
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer-contact />
+
+<p-toast></p-toast>

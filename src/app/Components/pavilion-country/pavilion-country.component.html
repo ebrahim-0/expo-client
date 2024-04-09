@@ -7,20 +7,32 @@
     <h1 class="text-center md:text-6xl mb-9">
       {{ pavilion?.name }}
     </h1>
-    <h4 class="mb-7">About the Pavilion</h4>
+    <h4 class="underline mb-7">About the Pavilion</h4>
     <p class="leading-10">
       {{ pavilion?.description }}
     </p>
 
-    <button
-      type="button"
-      pButton
-      pRipple
-      (click)="showDialog()"
-      class="flex items-center gap-3 mx-auto my-4 text-white bg-gray-400 border-0 p-button-info w-fit"
-    >
-      Show Time
-    </button>
+    <div class="flex">
+      @if (pavilion?.name === 'Kingdom of Saudi Arabia') {
+      <a
+        [routerLink]="['/saudi-vr']"
+        pButton
+        pRipple
+        class="flex items-center gap-3 mx-auto my-4 text-white bg-gray-400 border-0 p-button-info w-fit"
+      >
+        Explore the pavilion
+      </a>
+      }
+      <button
+        type="button"
+        pButton
+        pRipple
+        (click)="showDialog()"
+        class="flex items-center gap-3 mx-auto my-4 text-white bg-gray-400 border-0 p-button-info w-fit"
+      >
+        Show Time
+      </button>
+    </div>
 
     <p-dialog
       header=""

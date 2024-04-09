@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { ServicesService } from '../../Services/services.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { FooterContactComponent } from '../footer-contact/footer-contact.component';
 
 @Component({
   selector: 'app-facilities',
@@ -33,6 +34,7 @@ import { ToastModule } from 'primeng/toast';
     DropdownModule,
     CommonModule,
     ToastModule,
+    FooterContactComponent,
   ],
   templateUrl: './facilities.component.html',
   styleUrl: './facilities.component.css',
