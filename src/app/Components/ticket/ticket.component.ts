@@ -21,8 +21,6 @@ export class TicketComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this._AuthService.currentUser;
-
-    console.log(this.currentUser);
   }
 
   bookTicket() {

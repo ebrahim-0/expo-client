@@ -3,19 +3,23 @@ import { FooterContactComponent } from '../footer-contact/footer-contact.compone
 import { ServicesService } from '../../Services/services.service';
 import { AuthService } from '../../Services/auth.service';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-view-ticket',
   standalone: true,
-  imports: [FooterContactComponent],
+  imports: [FooterContactComponent, ToastModule],
   templateUrl: './view-ticket.component.html',
   styleUrl: './view-ticket.component.css',
+  providers: [MessageService],
 })
 export class ViewTicketComponent implements OnInit {
   constructor(
     private _AuthService: AuthService,
     private _Router: Router,
-    private _ServicesService: ServicesService
+    private _ServicesService: ServicesService,
+    private _MessageService: MessageService
   ) {}
 
   currentUser: any;
@@ -28,10 +32,24 @@ export class ViewTicketComponent implements OnInit {
 
     this._ServicesService.getTicketByUser().subscribe({
       next: (res) => {
+        // if (res) {
+        //   this.tickets = res.tickets;
+        // }
+
         console.log(res);
+
+        this._MessageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Tickets get Successfully',
+        });
       },
       error: (error) => {
-        console.error(error);
+        this._MessageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: error.error.message,
+        });
       },
     });
   }

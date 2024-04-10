@@ -70,11 +70,23 @@ export class BookTicketComponent implements OnInit {
 
     this._ServicesService.getTicketByUser().subscribe({
       next: (res) => {
-        console.log(res);
         if (res) {
           this.tickets = res.tickets;
+        }
+
+        if (
+          res.tickets[0].quantity > 0 ||
+          res.tickets[1].quantity > 0 ||
+          res.tickets[2].quantity > 0
+        ) {
           this.isATicket = true;
         }
+
+        this._MessageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Tickets get Successfully',
+        });
       },
       error: (error) => {
         this._MessageService.add({
@@ -96,6 +108,10 @@ export class BookTicketComponent implements OnInit {
           summary: 'Success',
           detail: 'Tickets booked successfully',
         });
+
+        setTimeout(() => {
+          this._Router.navigate(['ticket/view-ticket']);
+        }, 1000);
       },
       error: (error) => {
         this.loading = false;
