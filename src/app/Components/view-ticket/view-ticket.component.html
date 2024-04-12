@@ -1,9 +1,78 @@
 <section
-  class="bg-[#082A3D] overlay py-9 h-[calc(100vh-98px)] flex flex-col justify-center items-center"
+  class="bg-[#082A3D] overlay py-9 min-h-screen flex flex-col justify-center items-center"
 >
   <div
-    class="text-lg font-bold max-w-[805px] text-[#FFFFFF] rounded-2xl p-8 md:p-20 mx-4 md:mx-32 text-center border bg-[#0E2431]"
-  ></div>
+    class="text-lg font-bold max-w-full text-[#FFFFFF] rounded-2xl p-8 md:p-20 mx-4 md:mx-32 text-center border bg-[#0E2431]"
+  >
+    <h1 class="mb-8">My Ticket</h1>
+    <h3 class="my-4 text-start">Information of ticket</h3>
+
+    <p-table
+      styleClass="h-fit mb-7"
+      tableStyleClass="w-[15rem] md:w-[30rem] lg:w-[45rem] mx-auto rounded-md bg-[#F5F5F5]/70"
+      responsiveLayout="scroll"
+      [value]="tickets?.tickets"
+      [scrollable]="true"
+      scrollHeight="flex"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Type of Ticket</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-ticket>
+        <tr *ngIf="ticket.quantity">
+          <td>{{ ticket.ticketType }}</td>
+          <td>{{ ticket.price }} S.R</td>
+          <td>{{ ticket.quantity }}</td>
+          <td>{{ ticket.price * ticket.quantity }} S.R</td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="summary">
+        <div class="flex items-center justify-end">
+          Total Price is {{ tickets?.totalPrice }} S.R.
+        </div>
+        <h2>
+          {{ tickets?.hashedTickets }}
+        </h2>
+      </ng-template>
+    </p-table>
+
+    <!-- <div class="bg-[#F5F5F5]/70 rounded-md overflow-x-auto">
+      <table class="w-full text-[#082A3D]">
+        <thead>
+          <tr>
+            <th class="px-3 py-4">Type of Ticket</th>
+            <th class="px-3 py-4">Price</th>
+            <th class="px-3 py-4">Quantity</th>
+            <th class="px-3 py-4">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (ticket of tickets?.tickets; track $index) {
+          <tr>
+            <td class="px-3 py-4">{{ ticket.ticketType }}</td>
+            <td class="px-3 py-4">{{ ticket.price }} S.R</td>
+            <td class="px-3 py-4">{{ ticket.quantity }}</td>
+            <td class="px-3 py-4">{{ ticket.price * ticket.quantity }} S.R</td>
+          </tr>
+          }
+        </tbody>
+        <tfoot>
+          <tr>
+            <td class="px-3 py-4"></td>
+            <td class="px-3 py-4"></td>
+            <td class="px-3 py-4">Total</td>
+            <td class="px-3 py-4">{{ tickets?.totalPrice }} S.R</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div> -->
+  </div>
 </section>
 
 <app-footer-contact />

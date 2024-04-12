@@ -72,14 +72,14 @@ export class BookTicketComponent implements OnInit {
       next: (res) => {
         if (res) {
           this.tickets = res.tickets;
-        }
 
-        if (
-          res.tickets[0].quantity > 0 ||
-          res.tickets[1].quantity > 0 ||
-          res.tickets[2].quantity > 0
-        ) {
-          this.isATicket = true;
+          if (
+            res.tickets[0].quantity > 0 ||
+            res.tickets[1].quantity > 0 ||
+            res.tickets[2].quantity > 0
+          ) {
+            this.isATicket = true;
+          }
         }
 
         this._MessageService.add({
