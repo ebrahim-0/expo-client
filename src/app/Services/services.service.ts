@@ -111,6 +111,12 @@ export class ServicesService {
     return this._HttpClient.get(`${this.API_URL}/api/v1/user/getAllTickets`);
   }
 
+  deleteTicket(id: string): Observable<any> {
+    return this._HttpClient.delete(
+      `${this.API_URL}/api/v1/user/deleteTicket/${id}`
+    );
+  }
+
   getTicketByUser(): Observable<any> {
     return this._HttpClient.get(`${this.API_URL}/api/v1/user/getTicketUser`);
   }

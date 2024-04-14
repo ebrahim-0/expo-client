@@ -5,6 +5,8 @@
     class="text-lg font-bold max-w-full text-[#FFFFFF] rounded-2xl p-8 md:p-20 mx-4 md:mx-32 text-center border bg-[#0E2431]"
   >
     <h1 class="mb-8">My Ticket</h1>
+
+    @if(tickets) {
     <h3 class="my-4 text-start">Information of ticket</h3>
 
     <p-table
@@ -37,10 +39,16 @@
           Total Price is {{ tickets?.totalPrice }} S.R.
         </div>
         <h2>
-          {{ tickets?.hashedTickets }}
+          Your Ticket id:
+          <span class="text-[#082A3D]">{{ tickets?.hashedTickets }}</span>
         </h2>
       </ng-template>
     </p-table>
+    } @else {
+    <div class="text-center my-3 bg-[#0E2431] rounded-2xl">
+      <p>No tickets found</p>
+    </div>
+    }
 
     <!-- <div class="bg-[#F5F5F5]/70 rounded-md overflow-x-auto">
       <table class="w-full text-[#082A3D]">

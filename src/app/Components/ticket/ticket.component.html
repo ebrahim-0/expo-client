@@ -27,7 +27,58 @@
       </a>
     </div>
 
-    }
+    } @else { @if (tickets?.length) {
+
+    <h3 class="my-4 text-start">All Users tickets</h3>
+    <p-table
+      styleClass="h-fit mb-7"
+      tableStyleClass="w-[15rem] md:w-[30rem] lg:w-[45rem] mx-auto rounded-md bg-[#F5F5F5]/70"
+      responsiveLayout="scroll"
+      [value]="tickets"
+      [scrollable]="true"
+      scrollHeight="flex"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>User</th>
+          <th>Ticket Id</th>
+          <th>Tickets</th>
+          <th>Total Price</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-ticket>
+        <tr>
+          <td class="capitalize">
+            {{ ticket.user.firstName }} {{ ticket.user.lastName }}
+          </td>
+          <td>{{ ticket.hashedTickets }}</td>
+          <td>
+            @for (ticket of ticket.tickets; track $index) {
+            <span *ngIf="ticket.quantity">
+              {{ ticket.ticketType }}: {{ ticket.quantity }}
+            </span>
+
+            }
+          </td>
+          <td>{{ ticket.totalPrice }} S.R</td>
+
+          <td>
+            <i
+              (click)="deleteTickets(ticket.ticketId)"
+              class="cursor-pointer pi pi-trash"
+              style="color: red"
+            ></i>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    } @else {
+    <div class="text-center my-3 bg-[#0E2431] rounded-2xl">
+      <p>No tickets found</p>
+    </div>
+    } }
   </div>
 </section>
 

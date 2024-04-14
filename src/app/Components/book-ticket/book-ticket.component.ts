@@ -82,11 +82,11 @@ export class BookTicketComponent implements OnInit {
           }
         }
 
-        this._MessageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'Tickets get Successfully',
-        });
+        // this._MessageService.add({
+        //   severity: 'success',
+        //   summary: 'Success',
+        //   detail: 'Tickets get Successfully',
+        // });
       },
       error: (error) => {
         this._MessageService.add({

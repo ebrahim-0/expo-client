@@ -6,11 +6,20 @@ import { AuthService } from '../../Services/auth.service';
 import { ServicesService } from '../../Services/services.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-ticket',
   standalone: true,
-  imports: [RouterModule, ButtonModule, ToastModule, FooterContactComponent],
+  imports: [
+    RouterModule,
+    ButtonModule,
+    CommonModule,
+    ToastModule,
+    FooterContactComponent,
+    TableModule,
+  ],
   templateUrl: './ticket.component.html',
   styleUrl: './ticket.component.css',
   providers: [MessageService],
@@ -33,7 +42,6 @@ export class TicketComponent implements OnInit {
       this._ServicesService.getAllTickets().subscribe({
         next: (res) => {
           this.tickets = res;
-          console.log(res);
         },
         error: (error) => {
           this._MessageService.add({
@@ -55,6 +63,26 @@ export class TicketComponent implements OnInit {
   viewTicket() {
     this._Router.navigate(['view-ticket'], {
       relativeTo: this._ActivatedRoute,
+    });
+  }
+
+  deleteTickets(id: string) {
+    this._ServicesService.deleteTicket(id).subscribe({
+      next: (res) => {
+        this._MessageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Ticket Deleted Successfully',
+        });
+        this.ngOnInit();
+      },
+      error: (error) => {
+        this._MessageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: error.error.message,
+        });
+      },
     });
   }
 }
