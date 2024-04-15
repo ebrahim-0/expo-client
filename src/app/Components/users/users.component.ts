@@ -174,32 +174,24 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(user: User) {
-    if (this._AuthService.currentUser.value?.rule === 'admin') {
-      this._MessageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'You are not allowed to delete a admin user',
-      });
-    } else {
-      this._UserService.deleteUser(user._id).subscribe({
-        next: (res) => {
-          this.users = this.users.filter((u) => u._id !== user._id);
-          this._MessageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: res.message,
-          });
-        },
-        error: (err) => {
-          console.error(err);
-          this._MessageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: err.error.message,
-          });
-        },
-      });
-    }
+    this._UserService.deleteUser(user._id).subscribe({
+      next: (res) => {
+        this.users = this.users.filter((u) => u._id !== user._id);
+        this._MessageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: res.message,
+        });
+      },
+      error: (err) => {
+        console.error(err);
+        this._MessageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error.message,
+        });
+      },
+    });
   }
 }
 

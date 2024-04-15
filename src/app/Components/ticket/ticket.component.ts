@@ -52,6 +52,20 @@ export class TicketComponent implements OnInit {
         },
       });
     }
+
+    if (this.currentUser.value.rule === 'guest') {
+      setTimeout(() => {
+        this._MessageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'You are not allowed to add a comment, Please Login First',
+        });
+
+        setTimeout(() => {
+          this._Router.navigate(['login']);
+        }, 1000);
+      }, 500);
+    }
   }
 
   bookTicket() {

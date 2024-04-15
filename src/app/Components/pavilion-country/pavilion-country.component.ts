@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
@@ -76,6 +76,8 @@ export class PavilionCountryComponent implements OnInit {
 
   pavilion: any;
 
+  currentUser: any;
+
   commentForm: FormGroup = new FormGroup({
     comment: new FormControl('', [
       Validators.required,
@@ -87,7 +89,8 @@ export class PavilionCountryComponent implements OnInit {
     private _ActivatedRoute: ActivatedRoute,
     private _AuthService: AuthService,
     private _ServicesService: ServicesService,
-    private _MessageService: MessageService
+    private _MessageService: MessageService,
+    private _Router: Router
   ) {}
 
   ngOnInit(): void {
@@ -95,6 +98,8 @@ export class PavilionCountryComponent implements OnInit {
       this.country = params['country'];
       this.getPavilionByCountry(this.country);
     });
+
+    this.currentUser = this._AuthService.currentUser;
 
     this._AuthService.currentUser.subscribe({
       next: (user) => {
@@ -109,7 +114,18 @@ export class PavilionCountryComponent implements OnInit {
     this.visible = true;
   }
   showAddComment() {
-    this.visibleComment = true;
+    if (this.currentUser.value.rule === 'guest') {
+      this._MessageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'You are not allowed to add a comment, Please Login First',
+      });
+      setTimeout(() => {
+        this._Router.navigate(['login']);
+      }, 1000);
+    } else {
+      this.visibleComment = true;
+    }
   }
 
   getPavilionByCountry(country: string) {
@@ -138,6 +154,7 @@ export class PavilionCountryComponent implements OnInit {
     commentForm.markAllAsTouched();
 
     if (commentForm.valid) {
+      console.log(commentForm.value.comment, this.author);
       this._ServicesService
         .addPavilionsReviews(this.country, {
           comment: commentForm.value.comment,
@@ -145,6 +162,7 @@ export class PavilionCountryComponent implements OnInit {
         })
         .subscribe({
           next: (res) => {
+            console.log(res);
             this._MessageService.add({
               severity: 'success',
               summary: 'Success',

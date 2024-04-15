@@ -85,10 +85,12 @@
         >Forgot password?</a
       >
 
+      @if(user === 'visitor'){
       <p class="mb-5 text-center text-white">
         Don't have an account yet?
         <a class="underline" routerLink="/register">Register now!</a>
       </p>
+      }
     </div>
   </form>
 
