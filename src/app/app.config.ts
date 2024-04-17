@@ -17,7 +17,8 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom([BrowserAnimationsModule]),
     {
       provide: 'API_URL',
-      useValue: 'https://expo-api-k8t6.onrender.com',
+      useValue: 'https://zany-necklace-eel.cyclic.app',
+      // useValue: 'https://expo-api-k8t6.onrender.com',
       // useValue: 'http://localhost:5000',
     },
   ],
