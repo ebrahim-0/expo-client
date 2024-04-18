@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FooterContactComponent } from '../footer-contact/footer-contact.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageModule } from 'primeng/message';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputTextModule } from 'primeng/inputtext';
@@ -11,6 +11,8 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { AuthService } from '../../Services/auth.service';
 import { Router } from '@angular/router';
+import { CalendarModule } from 'primeng/calendar';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-book-ticket',
@@ -24,6 +26,8 @@ import { Router } from '@angular/router';
     ButtonModule,
     ProgressSpinnerModule,
     ToastModule,
+    CalendarModule,
+    FormsModule,
   ],
   templateUrl: './book-ticket.component.html',
   styleUrl: './book-ticket.component.css',
@@ -31,6 +35,10 @@ import { Router } from '@angular/router';
 })
 export class BookTicketComponent implements OnInit {
   loading: boolean = false;
+
+  date: Date = new Date();
+
+  @ViewChild('bookTicket') bookTicket: any;
 
   tickets = [
     {
@@ -81,12 +89,6 @@ export class BookTicketComponent implements OnInit {
             this.isATicket = true;
           }
         }
-
-        // this._MessageService.add({
-        //   severity: 'success',
-        //   summary: 'Success',
-        //   detail: 'Tickets get Successfully',
-        // });
       },
       error: (error) => {
         this._MessageService.add({
@@ -100,7 +102,7 @@ export class BookTicketComponent implements OnInit {
 
   submitBookTicket() {
     this.loading = true;
-    this._ServicesService.BookTickets(this.tickets).subscribe({
+    this._ServicesService.BookTickets(this.date, this.tickets).subscribe({
       next: (res) => {
         this.loading = false;
         this._MessageService.add({

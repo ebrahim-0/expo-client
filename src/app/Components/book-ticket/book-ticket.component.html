@@ -1,11 +1,21 @@
 <section
+  #bookTicket
   class="bg-[#082A3D] overlay py-9 flex flex-col justify-center items-center"
 >
   <div
     class="text-lg font-bold max-w-[805px] text-[#FFFFFF] rounded-2xl p-8 md:p-20 mx-4 md:mx-32 text-center border bg-[#0E2431]"
   >
     <h1 class="mb-8">Book Tickets</h1>
-    <h3 class="my-4 text-start">Date</h3>
+    <h3 class="text-start">Date</h3>
+
+    <p-calendar
+      styleClass="w-[15rem] mt-9 md:w-[30rem] lg:w-[45rem] mx-auto rounded-md "
+      inputStyleClass="bg-transparent"
+      [(ngModel)]="date"
+      [showTime]="true"
+      [appendTo]="bookTicket"
+    ></p-calendar>
+
     <h3 class="my-4 text-start">Type of Ticket</h3>
 
     <div>

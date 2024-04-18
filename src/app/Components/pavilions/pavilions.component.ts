@@ -179,6 +179,7 @@ export class PavilionsComponent implements OnInit {
   getAllPavilions() {
     this._ServicesService.getAllPavilions().subscribe({
       next: (res) => {
+        console.log(res);
         this.pavilions = res.pavilions;
       },
       error: (error) => {

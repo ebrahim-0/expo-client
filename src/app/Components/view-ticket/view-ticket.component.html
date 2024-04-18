@@ -9,6 +9,12 @@
     @if(tickets) {
     <h3 class="my-4 text-start">Information of ticket</h3>
 
+    <h3 class="text-start">Date</h3>
+
+    <p class="my-3 text-start">
+      {{ tickets?.date | date : "medium" }}
+    </p>
+
     <p-table
       styleClass="h-fit mb-7"
       tableStyleClass="w-[15rem] md:w-[30rem] lg:w-[45rem] mx-auto rounded-md bg-[#F5F5F5]/70"

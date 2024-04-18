@@ -36,6 +36,7 @@ export class NavbarComponent implements OnInit {
   navLinks = [
     { path: 'about-us', label: 'About Us' },
     { path: 'work-time', label: 'Work Time' },
+    { path: 'show-time', label: 'Show Time' },
     { path: 'pavilions', label: 'pavilions' },
     { path: 'facilities', label: 'Facilities' },
     { path: 'ticket', label: 'Ticket' },

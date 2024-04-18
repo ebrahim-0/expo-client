@@ -88,7 +88,7 @@
 
     <p-table
       styleClass="h-fit mb-7"
-      tableStyleClass="w-[15rem] md:w-[30rem] lg:w-[45rem] mx-auto"
+      tableStyleClass="w-[15rem] md:w-[30rem] lg:w-[40rem] mx-auto"
       responsiveLayout="scroll"
       [value]="showTimes"
       [scrollable]="true"
@@ -149,8 +149,35 @@
     } } @else {
 
     <h1 class="mb-8">Show Time Visitor</h1>
+    @if(showTimes.length){
 
-    }
+    <p-table
+      styleClass="h-fit mb-7"
+      tableStyleClass="w-[15rem] md:w-[30rem] lg:w-[40rem] mx-auto"
+      responsiveLayout="scroll"
+      [value]="showTimes"
+      [scrollable]="true"
+      scrollHeight="flex"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Pavilion Id</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-showTime>
+        <tr>
+          <td>{{ showTime.name }}</td>
+          <td>{{ showTime.pavilionId }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    } @else {
+    <div class="text-center my-3 bg-[#0E2431] rounded-2xl">
+      <p>No show times found</p>
+    </div>
+    } }
   </div>
 </section>
 

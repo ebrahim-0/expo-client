@@ -132,6 +132,7 @@ export class PavilionCountryComponent implements OnInit {
     this._ServicesService.getPavilionByCountry(country).subscribe({
       next: (res) => {
         this.pavilion = res.existPavilion;
+        console.log('this.pavilion', this.pavilion);
       },
       error: (error) => {
         console.log(error);

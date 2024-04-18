@@ -101,8 +101,9 @@ export class ServicesService {
   getAllShowTime(): Observable<any> {
     return this._HttpClient.get(`${this.API_URL}/api/v1/user/getAllShowTimes`);
   }
-  BookTickets(tickets: any[]): Observable<any> {
+  BookTickets(date: Date, tickets: any[]): Observable<any> {
     return this._HttpClient.post(`${this.API_URL}/api/v1/user/bookTickets`, {
+      date,
       tickets,
     });
   }

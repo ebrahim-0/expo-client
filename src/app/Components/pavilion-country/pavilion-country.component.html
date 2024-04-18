@@ -41,8 +41,17 @@
       [style]="{ width: '50rem' }"
       [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
     >
-      <h2 class="">Ardha</h2>
-      <p>8:00 – 8:15PM</p>
+      @for (showTime of pavilion?.showTime; track $index) {
+
+      <div class="py-2 border-b-2">
+        <h2>Show: {{ showTime.name }}</h2>
+        <p>Time: {{ showTime.time }}</p>
+      </div>
+
+      } @empty {
+      <p>No show times found</p>
+
+      }
       <ng-template pTemplate="footer">
         <button
           type="button"
