@@ -53,11 +53,11 @@ export class ForgotPasswordComponent {
       this._AuthService.forgotPassword(resetForm.value).subscribe({
         next: (res) => {
           this.loading = false;
-          this._MessageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: res.message,
-          });
+          // this._MessageService.add({
+          //   severity: 'success',
+          //   summary: 'Success',
+          //   detail: res.message,
+          // });
 
           setTimeout(() => {
             this._Router.navigate(['/verify-reset-code'], {

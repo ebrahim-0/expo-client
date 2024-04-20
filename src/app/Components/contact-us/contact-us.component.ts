@@ -66,11 +66,11 @@ export class ContactUsComponent {
 
       this._UserService.sendMessage(contactForm.value).subscribe({
         next: (res) => {
-          this._MessageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: res.message,
-          });
+          // this._MessageService.add({
+          //   severity: 'success',
+          //   summary: 'Success',
+          //   detail: res.message,
+          // });
 
           this.loading = false;
         },

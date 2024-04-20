@@ -105,11 +105,11 @@ export class RegisterComponent {
 
             this._AuthService.currentUser.next(res.user);
 
-            this._MessageService.add({
-              severity: 'success',
-              summary: 'Success',
-              detail: res.message,
-            });
+            // this._MessageService.add({
+            //   severity: 'success',
+            //   summary: 'Success',
+            //   detail: res.message,
+            // });
 
             setTimeout(() => {
               this._Router.navigate(['/']);

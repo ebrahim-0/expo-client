@@ -52,11 +52,11 @@ export class VerifyResetCodeComponent {
       next: (res) => {
         this.loading = false;
 
-        this._MessageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: res.message,
-        });
+        // this._MessageService.add({
+        //   severity: 'success',
+        //   summary: 'Success',
+        //   detail: res.message,
+        // });
 
         setTimeout(() => {
           this._Router.navigate(['/reset-password'], {
@@ -79,11 +79,11 @@ export class VerifyResetCodeComponent {
   resendCode() {
     this._AuthService.resendCode(this.userId).subscribe({
       next: (res) => {
-        this._MessageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: res.message,
-        });
+        // this._MessageService.add({
+        //   severity: 'success',
+        //   summary: 'Success',
+        //   detail: res.message,
+        // });
       },
       error: (err) => {
         this._MessageService.add({

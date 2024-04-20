@@ -1,27 +1,22 @@
 <section class="bg-[#082A3D] overlay py-9 flex justify-center items-center">
   <div
-    class="text-lg font-bold w-full text-[#FFFFFF] rounded-2xl p-8 lg:p-20 mx-4 lg:mx-32 text-center border bg-[#0E2431]"
+    class="text-lg font-bold w-full text-[#FFFFFF] rounded-2xl p-4 lg:p-20 mx-2 lg:mx-32 text-center border bg-[#0E2431]"
   >
-    <!-- <iframe
-    class="w-full h-screen"
-    src="https://momento360.com/e/u/f70a976c271a4f1298556f77ff04bed1?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=100&size=medium&display-plan=true"
-    frameborder="0"
-    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-  ></iframe>
-  <iframe
-    class="w-full h-screen"
-    src="https://momento360.com/e/u/a3fb2427c116455a8f09680526958642?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true"
-    frameborder="0"
-    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-  ></iframe> -->
-    <iframe
-      class="w-full h-screen"
-      src="https://momento360.com/e/u/9880a8a20c3a49e0a6679d2decd84e20?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true"
-      frameborder="0"
-      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-    ></iframe>
+    <p-carousel
+      [value]="images"
+      [numVisible]="1"
+      [numScroll]="1"
+      [circular]="false"
+    >
+      <ng-template let-image pTemplate="item">
+        <iframe
+          class="w-full h-screen"
+          [src]="sanitizeUrl(image.source)"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </ng-template>
+    </p-carousel>
   </div>
 </section>

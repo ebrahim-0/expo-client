@@ -134,11 +134,11 @@ export class FacilitiesComponent implements OnInit {
     } else {
       this._ServicesService.deleteFacility(id).subscribe({
         next: (res) => {
-          this._MessageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: res.message,
-          });
+          // this._MessageService.add({
+          //   severity: 'success',
+          //   summary: 'Success',
+          //   detail: res.message,
+          // });
           this.getAllFacilities();
         },
         error: (error) => {

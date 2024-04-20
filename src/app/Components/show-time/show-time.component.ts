@@ -95,11 +95,11 @@ export class ShowTimeComponent implements OnInit {
             next: (res) => {
               this.loading = false;
 
-              this._MessageService.add({
-                severity: 'success',
-                summary: 'Success',
-                detail: res.message,
-              });
+              // this._MessageService.add({
+              //   severity: 'success',
+              //   summary: 'Success',
+              //   detail: res.message,
+              // });
 
               setTimeout(() => {
                 this.getAllShowTime();
@@ -125,11 +125,11 @@ export class ShowTimeComponent implements OnInit {
         this._ServicesService.addShowTime(showTimeForm.value).subscribe({
           next: (res) => {
             this.loading = false;
-            this._MessageService.add({
-              severity: 'success',
-              summary: 'Success',
-              detail: res.message,
-            });
+            // this._MessageService.add({
+            //   severity: 'success',
+            //   summary: 'Success',
+            //   detail: res.message,
+            // });
             setTimeout(() => {
               this.getAllShowTime();
               this.showTimeForm.reset();
@@ -155,11 +155,11 @@ export class ShowTimeComponent implements OnInit {
   deleteShowTime(id: string) {
     this._ServicesService.deleteShowTime(id).subscribe({
       next: (res) => {
-        this._MessageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: res.message,
-        });
+        // this._MessageService.add({
+        //   severity: 'success',
+        //   summary: 'Success',
+        //   detail: res.message,
+        // });
         this.getAllShowTime();
       },
       error: (error) => {

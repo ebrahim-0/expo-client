@@ -28,6 +28,7 @@ import { CommonModule } from '@angular/common';
     ToastModule,
     CalendarModule,
     FormsModule,
+    CommonModule,
   ],
   templateUrl: './book-ticket.component.html',
   styleUrl: './book-ticket.component.css',
@@ -105,11 +106,11 @@ export class BookTicketComponent implements OnInit {
     this._ServicesService.BookTickets(this.date, this.tickets).subscribe({
       next: (res) => {
         this.loading = false;
-        this._MessageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'Tickets booked successfully',
-        });
+        // this._MessageService.add({
+        //   severity: 'success',
+        //   summary: 'Success',
+        //   detail: 'Tickets booked successfully',
+        // });
 
         setTimeout(() => {
           this._Router.navigate(['ticket/view-ticket']);
@@ -127,9 +128,13 @@ export class BookTicketComponent implements OnInit {
   }
 
   incrementTicket(index: number) {
+    if (this.isATicket) return;
+
     this.tickets[index].quantity++;
   }
   decrementTicket(index: number) {
+    if (this.isATicket) return;
+
     if (this.tickets[index].quantity === 0) {
       return;
     }

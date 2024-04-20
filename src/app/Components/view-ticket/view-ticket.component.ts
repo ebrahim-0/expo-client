@@ -40,11 +40,11 @@ export class ViewTicketComponent implements OnInit {
           this.tickets = res;
         }
 
-        this._MessageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'Ticket get Successfully',
-        });
+        // this._MessageService.add({
+        //   severity: 'success',
+        //   summary: 'Success',
+        //   detail: 'Ticket get Successfully',
+        // });
       },
       error: (error) => {
         this._MessageService.add({

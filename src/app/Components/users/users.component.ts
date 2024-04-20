@@ -99,11 +99,11 @@ export class UsersComponent implements OnInit {
         this._UserService.updateUser(this.userId, userForm.value).subscribe({
           next: (res) => {
             this.submitted = false;
-            this._MessageService.add({
-              severity: 'success',
-              summary: 'Success',
-              detail: res.message,
-            });
+            // this._MessageService.add({
+            //   severity: 'success',
+            //   summary: 'Success',
+            //   detail: res.message,
+            // });
 
             setTimeout(() => {
               this._Router.navigate(['/users']);
@@ -128,11 +128,11 @@ export class UsersComponent implements OnInit {
       next: (res) => {
         this.loading = false;
         this.userForm.patchValue(res.user);
-        this._MessageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: res.message,
-        });
+        // this._MessageService.add({
+        //   severity: 'success',
+        //   summary: 'Success',
+        //   detail: res.message,
+        // });
       },
       error: (err) => {
         console.error(err);
@@ -150,11 +150,11 @@ export class UsersComponent implements OnInit {
     this._UserService.getAllUsers().subscribe({
       next: (res) => {
         this.users = res.users;
-        this._MessageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: res.message,
-        });
+        // this._MessageService.add({
+        //   severity: 'success',
+        //   summary: 'Success',
+        //   detail: res.message,
+        // });
         this.loading = false;
       },
       error: (err) => {
@@ -177,11 +177,11 @@ export class UsersComponent implements OnInit {
     this._UserService.deleteUser(user._id).subscribe({
       next: (res) => {
         this.users = this.users.filter((u) => u._id !== user._id);
-        this._MessageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: res.message,
-        });
+        // this._MessageService.add({
+        //   severity: 'success',
+        //   summary: 'Success',
+        //   detail: res.message,
+        // });
       },
       error: (err) => {
         console.error(err);

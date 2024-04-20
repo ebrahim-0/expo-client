@@ -83,11 +83,11 @@ export class TicketComponent implements OnInit {
   deleteTickets(id: string) {
     this._ServicesService.deleteTicket(id).subscribe({
       next: (res) => {
-        this._MessageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'Ticket Deleted Successfully',
-        });
+        // this._MessageService.add({
+        //   severity: 'success',
+        //   summary: 'Success',
+        //   detail: 'Ticket Deleted Successfully',
+        // });
         this.ngOnInit();
       },
       error: (error) => {

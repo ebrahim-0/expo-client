@@ -59,11 +59,11 @@ export class NavbarComponent implements OnInit {
   logout() {
     this._AuthService.logoutUser();
 
-    this._MessageService.add({
-      severity: 'info',
-      summary: 'Logout',
-      detail: 'You have been logged out successfully',
-    });
+    // this._MessageService.add({
+    //   severity: 'info',
+    //   summary: 'Logout',
+    //   detail: 'You have been logged out successfully',
+    // });
   }
 
   navigateToRegister() {

@@ -164,11 +164,11 @@ export class PavilionCountryComponent implements OnInit {
         .subscribe({
           next: (res) => {
             console.log(res);
-            this._MessageService.add({
-              severity: 'success',
-              summary: 'Success',
-              detail: res.message,
-            });
+            // this._MessageService.add({
+            //   severity: 'success',
+            //   summary: 'Success',
+            //   detail: res.message,
+            // });
             this.getAllPavilionsReviews();
           },
           error: (error) => {
