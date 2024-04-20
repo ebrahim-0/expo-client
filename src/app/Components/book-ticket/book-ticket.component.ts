@@ -37,7 +37,7 @@ import { CommonModule } from '@angular/common';
 export class BookTicketComponent implements OnInit {
   loading: boolean = false;
 
-  date: Date = new Date();
+  date!: Date;
 
   @ViewChild('bookTicket') bookTicket: any;
 
@@ -71,6 +71,7 @@ export class BookTicketComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.date);
     this.currentUser = this._AuthService.currentUser;
 
     if (this.currentUser.value.rule !== 'visitor') {
@@ -81,6 +82,7 @@ export class BookTicketComponent implements OnInit {
       next: (res) => {
         if (res) {
           this.tickets = res.tickets;
+          this.date = new Date(res.date);
 
           if (
             res.tickets[0].quantity > 0 ||
@@ -128,6 +130,8 @@ export class BookTicketComponent implements OnInit {
   }
 
   incrementTicket(index: number) {
+    console.log(this.date);
+
     if (this.isATicket) return;
 
     this.tickets[index].quantity++;
