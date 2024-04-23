@@ -41,12 +41,11 @@ export class UsersComponent implements OnInit {
     private _MessageService: MessageService,
     private _Router: Router,
     private _ActivatedRoute: ActivatedRoute,
-    private _AuthService: AuthService
   ) {}
 
   users: User[] = [];
 
-  rules: any[] = ['guest', 'admin', 'visitor', 'employee'];
+  rules: string[] = ['admin', 'visitor', 'employee'];
 
   loading: boolean = true;
   submitted: boolean = false;
