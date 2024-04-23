@@ -97,10 +97,6 @@ export class PavilionsComponent implements OnInit {
       if (this._AuthService.currentUser.value?.rule === 'admin') {
         this._Router.navigate(['/']);
       }
-
-      // if (this._AuthService.currentUser.value?.rule === 'visitor') {
-      //   this._Router.navigate(['/pavilions']);
-      // }
     });
 
     this.currentUser = this._AuthService.currentUser;
@@ -179,7 +175,6 @@ export class PavilionsComponent implements OnInit {
   getAllPavilions() {
     this._ServicesService.getAllPavilions().subscribe({
       next: (res) => {
-        console.log(res);
         this.pavilions = res.pavilions;
       },
       error: (error) => {
