@@ -172,13 +172,9 @@
       } Add Facility
     </button>
 
-    } }
-
-    @if(!currentUser?.value?.rule || currentUser?.value?.rule==="visitor") {
+    } } @if(!currentUser?.value?.rule || currentUser?.value?.rule==="visitor") {
 
     <h1 class="mb-16">Facilities</h1>
-
-    <h3>Restaurants</h3>
 
     <div
       routerLink="/facility/restaurant"
@@ -190,10 +186,7 @@
         width="400"
         alt="restaurant"
       />
-
     </div>
-
-    <h3>Coffee</h3>
 
     <div
       routerLink="/facility/coffee"
@@ -205,23 +198,18 @@
         width="400"
         alt="restaurant"
       />
-
-
     </div>
 
-    <h3>Public facilities</h3>
     <div
-    routerLink="/facility/public-facilities"
-
-    class="flex flex-col justify-center md:flex-row my-9 gap-9 md:gap-36">
-
+      routerLink="/facility/public-facilities"
+      class="flex flex-col justify-center md:flex-row my-9 gap-9 md:gap-36"
+    >
       <img
-      src="assets/general.jpg"
-      class="cursor-pointer"
-      width="400"
-      alt="restaurant"
-    />
-
+        src="assets/general.jpg"
+        class="cursor-pointer"
+        width="400"
+        alt="restaurant"
+      />
     </div>
 
     }
