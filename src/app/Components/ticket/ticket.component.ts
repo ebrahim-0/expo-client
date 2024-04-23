@@ -38,7 +38,7 @@ export class TicketComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this._AuthService.currentUser;
 
-    if (this.currentUser.value.rule === 'employee') {
+    if (this.currentUser?.value?.rule === 'employee') {
       this._ServicesService.getAllTickets().subscribe({
         next: (res) => {
           this.tickets = res;
@@ -53,12 +53,12 @@ export class TicketComponent implements OnInit {
       });
     }
 
-    if (this.currentUser.value.rule === 'guest') {
+    if (!this.currentUser?.value?.rule) {
       setTimeout(() => {
         this._MessageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'You are not allowed to add a comment, Please Login First',
+          detail: 'You are not allowed to book a Tickets, Please Login First',
         });
 
         setTimeout(() => {

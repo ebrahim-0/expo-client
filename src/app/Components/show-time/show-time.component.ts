@@ -67,8 +67,9 @@ export class ShowTimeComponent implements OnInit {
             time: this.showTime.time,
           });
         }
+      } else {
+        this._Router.navigate(['/']);
       }
-
       if (this.action === 'add') {
         this.showTime = {};
         this.showTimeForm.reset();

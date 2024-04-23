@@ -4,7 +4,7 @@
   <div
     class="text-lg font-bold max-w-[805px] text-[#FFFFFF] rounded-2xl p-8 md:p-20 mx-4 md:mx-32 text-center border bg-[#0E2431]"
   >
-    @if(currentUser.value.rule == 'employee'){ @if(action){
+    @if(currentUser?.value?.rule === 'employee'){ @if(action){
 
     <h1 class="mb-8">@if(pavilion?.id){ Update } @else { New } Pavilion</h1>
 
@@ -133,7 +133,7 @@
 
       } Add Pavilion
     </button>
-    } } @else {
+    } } @if(!currentUser?.value?.rule ||currentUser?.value?.rule==="visitor" ) {
     <h1 class="mb-16">Pavilions</h1>
 
     <div class="grid grid-cols-1 mx-auto md:grid-cols-2 lg:grid-cols-3 gap-7">

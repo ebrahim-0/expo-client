@@ -2,7 +2,7 @@
   <div
     class="text-lg font-bold max-w-[805px] text-[#FFFFFF] rounded-2xl p-8 md:p-20 mx-4 md:mx-auto text-center border bg-[#0E2431]"
   >
-    @if(currentUser.value.rule == 'employee'){ @if(action){
+    @if(currentUser?.value?.rule == 'employee'){ @if(action){
 
     <h1 class="mb-8">@if(facility?.id){ Update } @else { new } Facility</h1>
 
@@ -172,7 +172,9 @@
       } Add Facility
     </button>
 
-    } } @else {
+    } }
+
+    @if(!currentUser?.value?.rule || currentUser?.value?.rule==="visitor") {
 
     <h1 class="mb-16">Facilities</h1>
 

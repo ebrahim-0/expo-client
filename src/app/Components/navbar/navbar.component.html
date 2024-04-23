@@ -7,7 +7,7 @@
         <div class="flex items-center">
           <div
             class="flex items-center flex-shrink-0 cursor-pointer"
-            routerLink="/"
+            routerLink="/home"
           >
             <img
               class="block w-auto h-24"
@@ -15,10 +15,22 @@
               alt="Your Company"
             />
           </div>
-          @if(currentUser.rule !== 'admin'){
 
           <div class="hidden my-auto ml-9 xl:block">
             <div class="flex space-x-2">
+              <a
+                *ngIf="currentUser?.rule === 'employee'"
+                [routerLink]="['/', 'show-time']"
+                routerLinkActive="bg-gray-900"
+                class="px-3 py-2 font-medium rounded-md hover:bg-gray-700"
+                [ngClass]="{
+                  'text-gray-300': isMobileMenu,
+                  'text-white': !isMobileMenu
+                }"
+                aria-current="page"
+                >Show Time</a
+              >
+
               @for (navLink of navLinks; track $index) {
               <a
                 [routerLink]="['/', navLink.path]"
@@ -35,7 +47,7 @@
             </div>
           </div>
 
-          } @if(currentUser.rule === 'admin'){
+          @if(currentUser?.rule === 'admin'){
 
           <div class="hidden my-auto ml-9 xl:block">
             <div class="flex space-x-2">
@@ -61,12 +73,11 @@
     </div>
 
     <div class="hidden gap-3 mr-12 md:flex">
-      @if(currentUser.rule !== 'admin') {
       <span class="p-input-icon-left">
         <i class="pi pi-search"></i>
         <input type="text" placeholder="Search" pInputText />
       </span>
-      } @if(currentUser.rule !== "guest"){
+      @if(currentUser?.rule ){
       <div class="flex items-center">
         <button
           (click)="logout()"
@@ -93,7 +104,7 @@
         </button>
       </div>
 
-      } @if (currentUser.rule ==='admin') {
+      } @if (currentUser?.rule ==='admin') {
       <div class="flex items-center">
         <button
           [routerLink]="['/register-employee']"
@@ -166,7 +177,7 @@
 
   <!-- Mobile menu, show/hide based on menu state. -->
 
-  @if(isMobileMenu){ @if(currentUser.rule !== 'admin'){
+  @if(isMobileMenu){
 
   <div class="border-b-2 xl:hidden" id="mobile-menu">
     <div class="px-2 pt-2 pb-3 space-y-1">
@@ -192,7 +203,7 @@
         <input type="text" placeholder="Search" pInputText />
       </span>
 
-      @if(currentUser.rule !== "guest"){
+      @if(currentUser?.rule ){
       <div class="flex items-center">
         <button
           (click)="logout()"
@@ -221,7 +232,7 @@
       }
     </div>
   </div>
-  } @if(currentUser.rule === 'admin'){
+  @if(currentUser?.rule === 'admin'){
 
   <div class="border-b-2 xl:hidden" id="mobile-menu">
     <div class="px-2 pt-2 pb-3 space-y-1">

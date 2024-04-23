@@ -72,7 +72,7 @@ export const routes: Routes = [
 
   {
     path: 'pavilions',
-    canActivate: [pageGuard],
+
     loadComponent: () =>
       import('./Components/pavilions/pavilions.component').then(
         (m) => m.PavilionsComponent
@@ -80,7 +80,7 @@ export const routes: Routes = [
   },
   {
     path: 'pavilions/:country',
-    canActivate: [pageGuard],
+
     loadComponent: () =>
       import('./Components/pavilion-country/pavilion-country.component').then(
         (m) => m.PavilionCountryComponent
@@ -88,7 +88,7 @@ export const routes: Routes = [
   },
   {
     path: 'facilities',
-    canActivate: [pageGuard],
+
     loadComponent: () =>
       import('./Components/facilities/facilities.component').then(
         (m) => m.FacilitiesComponent
@@ -96,7 +96,7 @@ export const routes: Routes = [
   },
   {
     path: 'facility/:facility',
-    canActivate: [pageGuard],
+
     loadComponent: () =>
       import('./Components/facility/facility.component').then(
         (m) => m.FacilityComponent
@@ -104,13 +104,13 @@ export const routes: Routes = [
   },
   {
     path: 'saudi-vr',
-    canActivate: [pageGuard],
+
     loadComponent: () =>
       import('./Components/vr/vr.component').then((m) => m.VRComponent),
   },
   {
     path: 'show-time',
-    canActivate: [pageGuard],
+
     loadComponent: () =>
       import('./Components/show-time/show-time.component').then(
         (m) => m.ShowTimeComponent
@@ -118,7 +118,7 @@ export const routes: Routes = [
   },
   {
     path: 'ticket',
-    canActivate: [pageGuard],
+
     loadComponent: () =>
       import('./Components/ticket/ticket.component').then(
         (m) => m.TicketComponent
@@ -127,7 +127,7 @@ export const routes: Routes = [
 
   {
     path: 'ticket/book-ticket',
-    canActivate: [pageGuard],
+
     loadComponent: () =>
       import('./Components/book-ticket/book-ticket.component').then(
         (m) => m.BookTicketComponent
@@ -136,25 +136,25 @@ export const routes: Routes = [
 
   {
     path: 'ticket/view-ticket',
-    canActivate: [pageGuard],
+
     loadComponent: () =>
       import('./Components/view-ticket/view-ticket.component').then(
         (m) => m.ViewTicketComponent
       ),
   },
 
-  {
-    path: 'about-us',
-    canActivate: [pageGuard],
-    loadComponent: () =>
-      import('./Components/about-us/about-us.component').then(
-        (m) => m.AboutUsComponent
-      ),
-  },
+  // {
+  //   path: 'about-us',
+
+  //   loadComponent: () =>
+  //     import('./Components/about-us/about-us.component').then(
+  //       (m) => m.AboutUsComponent
+  //     ),
+  // },
 
   {
     path: 'contact-us',
-    canActivate: [pageGuard],
+
     loadComponent: () =>
       import('./Components/contact-us/contact-us.component').then(
         (m) => m.ContactUsComponent

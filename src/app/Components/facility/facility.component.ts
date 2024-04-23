@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicesService } from '../../Services/services.service';
 import { ActivatedRoute } from '@angular/router';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-facility',
   standalone: true,
-  imports: [],
+  imports: [TableModule],
   templateUrl: './facility.component.html',
   styleUrl: './facility.component.css',
 })

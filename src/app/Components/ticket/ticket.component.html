@@ -6,7 +6,7 @@
   >
     <h1 class="mb-8">Tickets</h1>
 
-    @if(currentUser.value.rule == 'visitor'){
+    @if(currentUser?.value?.rule == 'visitor'){
 
     <div class="flex flex-col justify-between gap-4 md:flex-row">
       <a
@@ -27,7 +27,7 @@
       </a>
     </div>
 
-    } @else { @if (tickets?.length) {
+    } @if(currentUser?.value?.rule === "employee") { @if (tickets?.length) {
 
     <h3 class="my-4 text-start">All Users tickets</h3>
     <p-table

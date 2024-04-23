@@ -33,10 +33,10 @@ export class NavbarComponent implements OnInit {
 
   currentUser!: any;
 
+  // { path: 'about-us', label: 'About Us' },
+  // { path: 'show-time', label: 'Show Time' },
   navLinks = [
-    { path: 'about-us', label: 'About Us' },
     { path: 'work-time', label: 'Work Time' },
-    { path: 'show-time', label: 'Show Time' },
     { path: 'pavilions', label: 'pavilions' },
     { path: 'facilities', label: 'Facilities' },
     { path: 'ticket', label: 'Ticket' },
@@ -54,6 +54,7 @@ export class NavbarComponent implements OnInit {
     this._AuthService.currentUser.subscribe((user) => {
       this.currentUser = user;
     });
+    console.log(this.currentUser);
   }
 
   logout() {

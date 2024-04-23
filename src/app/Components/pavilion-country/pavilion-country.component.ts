@@ -114,7 +114,7 @@ export class PavilionCountryComponent implements OnInit {
     this.visible = true;
   }
   showAddComment() {
-    if (this.currentUser.value.rule === 'guest') {
+    if (!this.currentUser?.value?.rule) {
       this._MessageService.add({
         severity: 'error',
         summary: 'Error',
@@ -132,7 +132,6 @@ export class PavilionCountryComponent implements OnInit {
     this._ServicesService.getPavilionByCountry(country).subscribe({
       next: (res) => {
         this.pavilion = res.existPavilion;
-        console.log('this.pavilion', this.pavilion);
       },
       error: (error) => {
         console.log(error);
@@ -155,7 +154,6 @@ export class PavilionCountryComponent implements OnInit {
     commentForm.markAllAsTouched();
 
     if (commentForm.valid) {
-      console.log(commentForm.value.comment, this.author);
       this._ServicesService
         .addPavilionsReviews(this.country, {
           comment: commentForm.value.comment,
@@ -163,7 +161,6 @@ export class PavilionCountryComponent implements OnInit {
         })
         .subscribe({
           next: (res) => {
-            console.log(res);
             // this._MessageService.add({
             //   severity: 'success',
             //   summary: 'Success',

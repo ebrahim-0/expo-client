@@ -98,9 +98,9 @@ export class PavilionsComponent implements OnInit {
         this._Router.navigate(['/']);
       }
 
-      if (this._AuthService.currentUser.value?.rule === 'visitor') {
-        this._Router.navigate(['/pavilions']);
-      }
+      // if (this._AuthService.currentUser.value?.rule === 'visitor') {
+      //   this._Router.navigate(['/pavilions']);
+      // }
     });
 
     this.currentUser = this._AuthService.currentUser;

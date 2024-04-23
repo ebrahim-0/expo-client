@@ -46,21 +46,21 @@ export class AppComponent implements OnInit {
     });
   }
 
-  @HostListener('window:load', ['$event'])
-  loadHandler(event: any) {
-    const token = this._CookieService.get('token');
-    if (!token) {
-      this._Router.navigate(['/']);
-    } else {
-    }
-  }
+  // @HostListener('window:load', ['$event'])
+  // loadHandler(event: any) {
+  //   const token = this._CookieService.get('token');
+  //   if (!token) {
+  //     this._Router.navigate(['/']);
+  //   } else {
+  //   }
+  // }
 
-  @HostListener('window:beforeunload', ['$event'])
-  beforeUnloadHandler(event: any) {
-    if (this.currentUser?.rule === 'guest') {
-      this._AuthService.logoutUser();
-    } else {
-      return;
-    }
-  }
+  // @HostListener('window:beforeunload', ['$event'])
+  // beforeUnloadHandler(event: any) {
+  //   if (this.currentUser?.rule === 'guest') {
+  //     this._AuthService.logoutUser();
+  //   } else {
+  //     return;
+  //   }
+  // }
 }

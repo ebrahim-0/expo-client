@@ -1,11 +1,15 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from '../Services/auth.service';
 
 export const pageGuard: CanActivateFn = (route, state) => {
-  const token = inject(CookieService).get('token');
+  const _AuthService = inject(AuthService)
 
-  if (token) {
+
+
+
+
+  if (_AuthService.currentUser?.getValue()) {
     return true;
   } else {
     inject(Router).navigate(['/']);
