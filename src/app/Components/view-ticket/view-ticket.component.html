@@ -4,18 +4,18 @@
   <div
     class="text-lg font-bold max-w-full text-[#FFFFFF] rounded-2xl p-8 md:p-20 mx-4 md:mx-32 text-center border bg-[#0E2431]"
   >
-    <h1 class="mb-8">My Ticket</h1>
+    <h1 class="mb-8">My Tickets</h1>
 
-    @if(tickets) {
+    @if(allTickets) {
     <h3 class="my-4 text-start">Information of ticket</h3>
 
-    <h3 class="text-start">Date</h3>
 
-    <p class="my-3 text-start">
-      {{ tickets?.date | date : "medium" }}
-    </p>
+    @for (tickets of allTickets; track $index) {
 
-    <p-table
+
+
+
+      <p-table
       styleClass="h-fit mb-7"
       tableStyleClass="w-[15rem] md:w-[30rem] lg:w-[45rem] mx-auto rounded-md bg-[#F5F5F5]/70"
       responsiveLayout="scroll"
@@ -26,17 +26,20 @@
       <ng-template pTemplate="header">
         <tr>
           <th>Type of Ticket</th>
+          <th>Date</th>
+
           <th>Price</th>
           <th>Quantity</th>
           <th>Total</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-ticket>
-        <tr *ngIf="ticket.quantity">
-          <td>{{ ticket.ticketType }}</td>
-          <td>{{ ticket.price }} S.R</td>
-          <td>{{ ticket.quantity }}</td>
-          <td>{{ ticket.price * ticket.quantity }} S.R</td>
+      <ng-template pTemplate="body" let-oneTicket>
+        <tr *ngIf="oneTicket.quantity">
+          <td>{{ oneTicket.ticketType }}</td>
+          <td>{{ tickets.date |date }}</td>
+          <td>{{ oneTicket.price }} S.R</td>
+          <td>{{ oneTicket.quantity }}</td>
+          <td>{{ oneTicket.price * oneTicket.quantity }} S.R</td>
         </tr>
       </ng-template>
 
@@ -50,6 +53,11 @@
         </h2>
       </ng-template>
     </p-table>
+
+    }
+
+
+
     } @else {
     <div class="text-center my-3 bg-[#0E2431] rounded-2xl">
       <p>No tickets found</p>

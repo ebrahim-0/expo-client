@@ -1,0 +1,20 @@
+<section
+  class="bg-[#082A3D] overlay min-h-[calc(100vh-98px)] flex flex-col justify-center items-center"
+>
+  <div
+    class="text-lg font-bold max-w-[805px] text-[#FFFFFF] rounded-2xl p-8 md:p-20 mx-4 md:mx-32 text-center border bg-[#0E2431]"
+  >
+    <h1 class="my-6 capitalize">
+      {{ facilityName }}
+    </h1>
+
+    @for (facilityItem of facility; track $index) {
+    <div class="grid items-start grid-cols-1 my-6 md:grid-cols-3">
+      <h1 class="text-2xl font-bold">Name: {{ facilityItem.name }}</h1>
+      <p class="text-lg">Type: {{ facilityItem.type }}</p>
+      <p class="text-lg">Status: {{ facilityItem.status }}</p>
+    </div>
+
+    }
+  </div>
+</section>

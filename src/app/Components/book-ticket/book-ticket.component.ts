@@ -39,6 +39,8 @@ export class BookTicketComponent implements OnInit {
 
   date!: Date;
 
+  currentDate: Date = new Date();
+
   @ViewChild('bookTicket') bookTicket: any;
 
   tickets = [
@@ -78,29 +80,22 @@ export class BookTicketComponent implements OnInit {
       this._Router.navigate(['/']);
     }
 
-    this._ServicesService.getTicketByUser().subscribe({
-      next: (res) => {
-        if (res) {
-          this.tickets = res.tickets;
-          this.date = new Date(res.date);
+    // this._ServicesService.getTicketByUser().subscribe({
+    //   next: (res) => {
+    //     if (res) {
+    //       this.tickets = res.tickets;
+    //       this.date = new Date(res.date);
 
-          if (
-            res.tickets[0].quantity > 0 ||
-            res.tickets[1].quantity > 0 ||
-            res.tickets[2].quantity > 0
-          ) {
-            this.isATicket = true;
-          }
-        }
-      },
-      error: (error) => {
-        this._MessageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: error.error.message,
-        });
-      },
-    });
+    //     }
+    //   },
+    //   error: (error) => {
+    //     this._MessageService.add({
+    //       severity: 'error',
+    //       summary: 'Error',
+    //       detail: error.error.message,
+    //     });
+    //   },
+    // });
   }
 
   submitBookTicket() {

@@ -29,21 +29,6 @@
           } }
         </div>
 
-        <!-- <div class="relative flex flex-col pt-2">
-          <p-floatLabel>
-            <input id="id" type="text" pInputText formControlName="id" />
-            <label for="id">ID</label>
-          </p-floatLabel>
-
-          @if(facilitiesForm.get('id')?.invalid &&
-          facilitiesForm.get('id')?.touched){
-          @if(facilitiesForm.get('id')?.getError('required')){
-
-          <p-message severity="error" text="id is required"></p-message>
-
-          } }
-        </div> -->
-
         <div class="relative flex flex-col pt-2">
           <p-floatLabel>
             <p-dropdown
@@ -61,6 +46,26 @@
           @if(facilitiesForm.get('type')?.getError('required')){
 
           <p-message severity="error" text="type is required"></p-message>
+
+          } }
+        </div>
+        <div class="relative flex flex-col pt-2">
+          <p-floatLabel>
+            <p-dropdown
+              formControlName="status"
+              styleClass="w-full bg-transparent text-start border-0 border-b-2 border-white rounded-none text-white shadow-none"
+              [options]="status"
+              placeholder="status"
+              id="status"
+            ></p-dropdown>
+            <label for="status">Status</label>
+          </p-floatLabel>
+
+          @if(facilitiesForm.get('status')?.invalid &&
+          facilitiesForm.get('status')?.touched){
+          @if(facilitiesForm.get('status')?.getError('required')){
+
+          <p-message severity="error" text="Status is required"></p-message>
 
           } }
         </div>
@@ -172,23 +177,44 @@
     <h1 class="mb-16">Facilities</h1>
 
     <h3>Restaurants</h3>
-    <div class="flex flex-col justify-center md:flex-row my-9 gap-9 md:gap-36">
-      <div
+
+    <div
+      routerLink="/facility/restaurant"
+      class="flex flex-col justify-center md:flex-row my-9 gap-9 md:gap-36"
+    >
+      <img
+        src="assets/restaurant.jpg"
+        class="cursor-pointer"
+        width="400"
+        alt="restaurant"
+      />
+
+      <!-- <div
         class="md:w-[350px] md:h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
       >
         <img src="assets/mac.png" width="170" alt="restaurant" />
-      </div>
-      <div
+      </div> -->
+      <!-- <div
         class="md:w-[350px] md:h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
       >
         <img src="assets/kfc.png" width="170" alt="restaurant" />
-      </div>
+      </div> -->
     </div>
 
     <h3>Coffee</h3>
 
-    <div class="flex flex-col justify-center md:flex-row my-9 gap-9 md:gap-36">
-      <div
+    <div
+      routerLink="/facility/coffee"
+      class="flex flex-col justify-center md:flex-row my-9 gap-9 md:gap-36"
+    >
+      <img
+        src="assets/coffee.jpg"
+        class="cursor-pointer"
+        width="400"
+        alt="restaurant"
+      />
+
+      <!-- <div
         class="md:w-[350px] md:h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
       >
         <img src="assets/starbucks.png" width="170" alt="restaurant" />
@@ -197,10 +223,10 @@
         class="md:w-[350px] md:h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
       >
         <img src="assets/tim.png" width="170" alt="restaurant" />
-      </div>
+      </div> -->
     </div>
 
-    <h3>General facilities</h3>
+    <h3>Public facilities</h3>
     <div class="flex flex-col justify-center md:flex-row my-9 gap-9 md:gap-36">
       <div
         class="md:w-[350px] md:h-[250px] rounded-2xl flex justify-center items-center borber bg-[#D9D9D9]"
@@ -213,6 +239,7 @@
         <img src="assets/mosque.png" width="130" alt="restaurant" />
       </div>
     </div>
+
     }
   </div>
 </section>

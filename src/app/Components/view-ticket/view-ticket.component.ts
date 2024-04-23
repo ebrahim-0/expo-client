@@ -17,7 +17,7 @@ import { TableModule } from 'primeng/table';
   providers: [MessageService],
 })
 export class ViewTicketComponent implements OnInit {
-  tickets: any;
+  allTickets: any;
 
   constructor(
     private _AuthService: AuthService,
@@ -37,7 +37,8 @@ export class ViewTicketComponent implements OnInit {
     this._ServicesService.getTicketByUser().subscribe({
       next: (res) => {
         if (res) {
-          this.tickets = res;
+          this.allTickets = res;
+          console.log(res)
         }
 
         // this._MessageService.add({

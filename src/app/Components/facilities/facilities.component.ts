@@ -11,7 +11,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TableModule } from 'primeng/table';
 import { AuthService } from '../../Services/auth.service';
 import { ButtonModule } from 'primeng/button';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { CommonModule } from '@angular/common';
@@ -35,6 +35,7 @@ import { FooterContactComponent } from '../footer-contact/footer-contact.compone
     CommonModule,
     ToastModule,
     FooterContactComponent,
+    RouterModule,
   ],
   templateUrl: './facilities.component.html',
   styleUrl: './facilities.component.css',
@@ -46,7 +47,9 @@ export class FacilitiesComponent implements OnInit {
   loading: boolean = false;
   facilities: any[] = [];
   facility: any = {};
-  types: any = ['Restaurant', 'Coffee', 'Public facilities'];
+
+  types: string[] = ['Restaurant', 'Coffee', 'Public facilities'];
+  status: string[] = ['Open', 'Close'];
 
   action: string = '';
   constructor(
@@ -61,6 +64,7 @@ export class FacilitiesComponent implements OnInit {
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
     type: new FormControl('', [Validators.required]),
+    status: new FormControl('', [Validators.required]),
   });
 
   ngOnInit(): void {
@@ -76,6 +80,7 @@ export class FacilitiesComponent implements OnInit {
             name: this.facility.name,
             description: this.facility.description,
             type: this.facility.type,
+            status: this.facility.status,
           });
         }
       }
@@ -117,6 +122,7 @@ export class FacilitiesComponent implements OnInit {
         detail: 'You are not allowed to edit facilities',
       });
     } else {
+      console.log(facility);
       this.facility = facility;
       this._Router.navigate(['/facilities'], {
         queryParams: { action: 'update' },
@@ -159,32 +165,63 @@ export class FacilitiesComponent implements OnInit {
     if (facilitiesForm.valid) {
       this.loading = true;
 
-      this._ServicesService.addFacility(facilitiesForm.value).subscribe({
-        next: (res) => {
-          this.loading = false;
-          this._MessageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: res.message,
-          });
-          setTimeout(() => {
-            this.getAllFacilities();
-            this.facilitiesForm.reset();
-            this.action = '';
+      if (this.action === 'add') {
+        this._ServicesService.addFacility(facilitiesForm.value).subscribe({
+          next: (res) => {
+            this.loading = false;
+            this._MessageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: res.message,
+            });
+            setTimeout(() => {
+              this.getAllFacilities();
+              this.facilitiesForm.reset();
+              this.action = '';
 
-            this._Router.navigate(['/facilities']);
-          }, 1000);
-        },
-        error: (error) => {
-          console.log(error);
-          this.loading = false;
-          this._MessageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: error.error.message,
+              this._Router.navigate(['/facilities']);
+            }, 1000);
+          },
+          error: (error) => {
+            console.log(error);
+            this.loading = false;
+            this._MessageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: error.error.message,
+            });
+          },
+        });
+      } else {
+        this._ServicesService
+          .updateFacility(this.facility.id, facilitiesForm.value)
+          .subscribe({
+            next: (res) => {
+              this.loading = false;
+              this._MessageService.add({
+                severity: 'success',
+                summary: 'Success',
+                detail: res.message,
+              });
+              setTimeout(() => {
+                this.getAllFacilities();
+                this.facilitiesForm.reset();
+                this.action = '';
+
+                this._Router.navigate(['/facilities']);
+              }, 1000);
+            },
+            error: (error) => {
+              console.log(error);
+              this.loading = false;
+              this._MessageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: error.error.message,
+              });
+            },
           });
-        },
-      });
+      }
     }
   }
 }

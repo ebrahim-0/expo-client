@@ -95,6 +95,14 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'facility/:facility',
+    canActivate: [pageGuard],
+    loadComponent: () =>
+      import('./Components/facility/facility.component').then(
+        (m) => m.FacilityComponent
+      ),
+  },
+  {
     path: 'saudi-vr',
     canActivate: [pageGuard],
     loadComponent: () =>
