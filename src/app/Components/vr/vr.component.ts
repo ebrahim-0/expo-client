@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
   templateUrl: './vr.component.html',
   styleUrl: './vr.component.css',
 })
-export class VRComponent {}
+export class VRComponent {
+
+
+
+
+
+  
+}

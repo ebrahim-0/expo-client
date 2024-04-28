@@ -8,29 +8,30 @@
       {{ facilityName }}
     </h1>
 
-
     <p-table
-    styleClass="h-fit mb-7"
-    tableStyleClass="w-[15rem] md:w-[30rem] lg:w-[40rem] mx-auto"
-    responsiveLayout="scroll"
-    [value]="facility"
-    [scrollable]="true"
-    scrollHeight="flex"
-  >
-    <ng-template pTemplate="header">
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>status</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-facilityItem>
-      <tr>
-        <td>{{ facilityItem.name }}</td>
-        <td>{{ facilityItem.type }}</td>
-        <td>{{ facilityItem.status }}</td>
-      </tr>
-    </ng-template>
-  </p-table>
+      styleClass="h-fit mb-7"
+      tableStyleClass="w-[15rem] md:w-[30rem] lg:w-[40rem] mx-auto"
+      responsiveLayout="scroll"
+      [value]="facility"
+      [scrollable]="true"
+      scrollHeight="flex"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>status</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-facilityItem>
+        <tr>
+          <td>{{ facilityItem.name }}</td>
+          <td>{{ facilityItem.type }}</td>
+          <td>{{ facilityItem.description }}</td>
+          <td>{{ facilityItem.status }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
   </div>
 </section>
