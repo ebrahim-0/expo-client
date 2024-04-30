@@ -1,21 +1,17 @@
 <section
-  class="bg-[#082A3D] overlay py-9 min-h-screen flex flex-col justify-center items-center"
+  class="flex flex-col justify-center items-center bg-[#082A3D] py-9 min-h-screen overlay"
 >
   <div
-    class="text-lg font-bold max-w-full text-[#FFFFFF] rounded-2xl p-8 md:p-20 mx-4 md:mx-32 text-center border bg-[#0E2431]"
+    class="bg-[#0E2431] mx-4 md:mx-32 p-8 md:p-20 border rounded-2xl max-w-full font-bold text-[#FFFFFF] text-center text-lg"
   >
     <h1 class="mb-8">My Tickets</h1>
 
     @if(allTickets) {
     <h3 class="my-4 text-start">Information of ticket</h3>
 
-
     @for (tickets of allTickets; track $index) {
 
-
-
-
-      <p-table
+    <p-table
       styleClass="h-fit mb-7"
       tableStyleClass="w-[15rem] md:w-[30rem] lg:w-[45rem] mx-auto rounded-md bg-[#F5F5F5]/70"
       responsiveLayout="scroll"
@@ -36,7 +32,7 @@
       <ng-template pTemplate="body" let-oneTicket>
         <tr *ngIf="oneTicket.quantity">
           <td>{{ oneTicket.ticketType }}</td>
-          <td>{{ tickets.date |date }}</td>
+          <td>{{ tickets.date | date }}</td>
           <td>{{ oneTicket.price }} S.R</td>
           <td>{{ oneTicket.quantity }}</td>
           <td>{{ oneTicket.price * oneTicket.quantity }} S.R</td>
@@ -44,56 +40,33 @@
       </ng-template>
 
       <ng-template pTemplate="summary">
-        <div class="flex items-center justify-end">
+        <div class="flex justify-end items-center">
           Total Price is {{ tickets?.totalPrice }} S.R.
         </div>
+
+        @if(!tickets.payed ) {
+
+        <button
+          (click)="payForTickets(tickets, $event)"
+          class="flex justify-center items-center gap-2 bg-[#2a42e0] hover:bg-[#1e2b5f] disabled:bg-[#1e2b5f] mt-4 px-4 py-2 rounded-md text-[#FFFFFF] disabled:cursor-not-allowed"
+        >
+          Pay Now
+        </button>
+        } @else {
+
         <h2>
           Your Ticket id:
           <span class="text-[#082A3D]">{{ tickets?.hashedTickets }}</span>
         </h2>
+        }
       </ng-template>
     </p-table>
 
-    }
-
-
-
-    } @else {
-    <div class="text-center my-3 bg-[#0E2431] rounded-2xl">
+    } } @else {
+    <div class="bg-[#0E2431] my-3 rounded-2xl text-center">
       <p>No tickets found</p>
     </div>
     }
-
-    <!-- <div class="bg-[#F5F5F5]/70 rounded-md overflow-x-auto">
-      <table class="w-full text-[#082A3D]">
-        <thead>
-          <tr>
-            <th class="px-3 py-4">Type of Ticket</th>
-            <th class="px-3 py-4">Price</th>
-            <th class="px-3 py-4">Quantity</th>
-            <th class="px-3 py-4">Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (ticket of tickets?.tickets; track $index) {
-          <tr>
-            <td class="px-3 py-4">{{ ticket.ticketType }}</td>
-            <td class="px-3 py-4">{{ ticket.price }} S.R</td>
-            <td class="px-3 py-4">{{ ticket.quantity }}</td>
-            <td class="px-3 py-4">{{ ticket.price * ticket.quantity }} S.R</td>
-          </tr>
-          }
-        </tbody>
-        <tfoot>
-          <tr>
-            <td class="px-3 py-4"></td>
-            <td class="px-3 py-4"></td>
-            <td class="px-3 py-4">Total</td>
-            <td class="px-3 py-4">{{ tickets?.totalPrice }} S.R</td>
-          </tr>
-        </tfoot>
-      </table>
-    </div> -->
   </div>
 </section>
 

@@ -103,15 +103,17 @@ export class BookTicketComponent implements OnInit {
     this._ServicesService.BookTickets(this.date, this.tickets).subscribe({
       next: (res) => {
         this.loading = false;
-        // this._MessageService.add({
-        //   severity: 'success',
-        //   summary: 'Success',
-        //   detail: 'Tickets booked successfully',
-        // });
 
-        setTimeout(() => {
-          this._Router.navigate(['ticket/view-ticket']);
-        }, 1000);
+        this._ServicesService.payForTicket(res.ticketId).subscribe({
+          next: (res) => {
+            console.log(res);
+
+            window.location.href = res.session.url;
+          },
+          error: (error) => {
+            console.error(error);
+          },
+        });
       },
       error: (error) => {
         this.loading = false;

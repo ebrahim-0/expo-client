@@ -168,6 +168,13 @@ export const routes: Routes = [
         (m) => m.WorkTimeComponent
       ),
   },
+  {
+    path: 'success',
+    loadComponent: () =>
+      import('./Components/pay-success/pay-success.component').then(
+        (m) => m.PaySuccessComponent
+      ),
+  },
 
   {
     path: '**',

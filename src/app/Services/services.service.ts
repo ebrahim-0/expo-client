@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ServicesService {
+  baseUrl = window.location.protocol + '//' + window.location.host;
+
   constructor(
     private _HttpClient: HttpClient,
     @Inject('API_URL') private API_URL: string
@@ -120,5 +122,19 @@ export class ServicesService {
 
   getTicketByUser(): Observable<any> {
     return this._HttpClient.get(`${this.API_URL}/api/v1/user/getTicketUser`);
+  }
+
+  payForTicket(ticketId: string): Observable<any> {
+    return this._HttpClient.post(
+      `${this.API_URL}/api/v1/user/checkout-session/${ticketId}?url=${this.baseUrl}`,
+      {}
+    );
+  }
+
+  payDone(ticketId: string): Observable<any> {
+    return this._HttpClient.post(
+      `${this.API_URL}/api/v1/user/payDone/${ticketId}`,
+      {}
+    );
   }
 }

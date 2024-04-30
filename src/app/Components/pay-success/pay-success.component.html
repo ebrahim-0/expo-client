@@ -1,0 +1,35 @@
+<section
+  class="flex flex-col justify-center items-center bg-[#082A3D] py-9 h-[calc(100vh-98px)] overlay"
+>
+  <div
+    class="bg-[#0E2431] mx-4 md:mx-32 p-8 md:p-20 border rounded-2xl max-w-[805px] font-bold text-[#FFFFFF] text-center text-lg"
+  >
+    @if(!payDone){
+    <p-progressSpinner
+      styleClass="w-18 h-18"
+      strokeWidth="8"
+      ariaLabel="loading"
+      fill="transparent"
+      animationDuration="1s"
+    ></p-progressSpinner>
+
+    }@else{
+    <h1 class="text-4xl">Payment Done Successfully</h1>
+    <p
+      class="my-5 text-center text-white underline hover:underline cursor-pointer"
+    >
+      Go to see your ticket
+    </p>
+
+    <button
+      pButton
+      pRipple
+      class="flex items-center gap-3 border-0 bg-gray-400 mx-auto p-button-info w-fit text-white"
+      [routerLink]="['/ticket/view-ticket']"
+    >
+      View Ticket
+    </button>
+
+    }
+  </div>
+</section>

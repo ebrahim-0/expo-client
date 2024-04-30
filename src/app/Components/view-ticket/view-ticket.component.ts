@@ -38,7 +38,7 @@ export class ViewTicketComponent implements OnInit {
       next: (res) => {
         if (res) {
           this.allTickets = res;
-          console.log(res)
+          console.log(res);
         }
 
         // this._MessageService.add({
@@ -53,6 +53,26 @@ export class ViewTicketComponent implements OnInit {
           summary: 'Error',
           detail: error.error.message,
         });
+      },
+    });
+  }
+
+  payForTickets(ticket: any, event: any) {
+    setTimeout(() => {
+      this._MessageService.add({
+        severity: 'info',
+        summary: 'Info',
+        detail: 'Please wait while we process your payment',
+      });
+    }, 10);
+
+    event.target.disabled = true;
+    this._ServicesService.payForTicket(ticket.ticketId).subscribe({
+      next: (res) => {
+        window.location.href = res.session.url;
+      },
+      error: (error) => {
+        console.error(error);
       },
     });
   }
