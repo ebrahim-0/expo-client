@@ -73,7 +73,6 @@ export class BookTicketComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.date);
     this.currentUser = this._AuthService.currentUser;
 
     if (this.currentUser.value.rule !== 'visitor') {
@@ -127,8 +126,6 @@ export class BookTicketComponent implements OnInit {
   }
 
   incrementTicket(index: number) {
-    console.log(this.date);
-
     if (this.isATicket) return;
 
     this.tickets[index].quantity++;

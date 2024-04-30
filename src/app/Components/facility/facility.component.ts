@@ -27,14 +27,9 @@ export class FacilityComponent implements OnInit {
 
     this._ServicesService.getAllFacilities().subscribe({
       next: (res) => {
-        console.log(res);
         this.facility = res.facilities.filter((item: Facility) => {
           return item.type.toLowerCase() === this.facilityName.toLowerCase();
         });
-
-        console.log(this.facility);
-
-        console.log(this.facilityName);
       },
       error: (error) => {
         console.log(error);

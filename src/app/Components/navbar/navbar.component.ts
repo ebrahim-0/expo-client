@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { AuthService } from '../../Services/auth.service';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-navbar',
@@ -25,8 +24,6 @@ import { MessageService } from 'primeng/api';
       ]),
     ]),
   ],
-
-  providers: [MessageService],
 })
 export class NavbarComponent implements OnInit {
   isMobileMenu = false;
@@ -44,17 +41,12 @@ export class NavbarComponent implements OnInit {
 
   adminLinks = [{ path: 'users', label: 'Users' }];
 
-  constructor(
-    private _AuthService: AuthService,
-    private _MessageService: MessageService,
-    private _Router: Router
-  ) {}
+  constructor(private _AuthService: AuthService, private _Router: Router) {}
 
   ngOnInit(): void {
     this._AuthService.currentUser.subscribe((user) => {
       this.currentUser = user;
     });
-    console.log(this.currentUser);
   }
 
   logout() {

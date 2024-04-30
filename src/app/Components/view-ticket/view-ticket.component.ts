@@ -38,7 +38,6 @@ export class ViewTicketComponent implements OnInit {
       next: (res) => {
         if (res) {
           this.allTickets = res;
-          console.log(res);
         }
 
         // this._MessageService.add({

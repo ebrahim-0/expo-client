@@ -122,7 +122,6 @@ export class FacilitiesComponent implements OnInit {
         detail: 'You are not allowed to edit facilities',
       });
     } else {
-      console.log(facility);
       this.facility = facility;
       this._Router.navigate(['/facilities'], {
         queryParams: { action: 'update' },

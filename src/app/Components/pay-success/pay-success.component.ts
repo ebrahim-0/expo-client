@@ -27,7 +27,6 @@ export class PaySuccessComponent implements OnInit {
 
       this._ServicesService.payDone(params['ticketId']).subscribe({
         next: (res) => {
-          console.log(res);
           if (res.status === 'success') {
             this.payDone = true;
           }
