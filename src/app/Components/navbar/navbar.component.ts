@@ -4,12 +4,11 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { AuthService } from '../../Services/auth.service';
-import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule, InputTextModule, CommonModule, ToastModule],
+  imports: [RouterModule, InputTextModule, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
   animations: [

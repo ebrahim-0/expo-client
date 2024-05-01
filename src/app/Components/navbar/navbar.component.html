@@ -1,12 +1,12 @@
-<nav class="bg-[#082A3D] sticky top-0 z-[100] border-b-2">
+<nav class="top-0 z-[100] sticky bg-[#082A3D] border-b-2">
   <div
-    class="relative flex items-center justify-between px-2 mx-auto max-w-screen-2xl sm:px-6 lg:px-8"
+    class="relative flex justify-between items-center mx-auto px-2 sm:px-6 lg:px-8 max-w-screen-2xl"
   >
-    <div class="flex items-center justify-between">
-      <div class="flex items-center flex-1 xl:justify-start">
+    <div class="flex justify-between items-center">
+      <div class="flex flex-1 xl:justify-start items-center">
         <div class="flex items-center">
           <div
-            class="flex items-center flex-shrink-0 cursor-pointer"
+            class="flex flex-shrink-0 items-center cursor-pointer"
             routerLink="/home"
           >
             <img
@@ -16,13 +16,13 @@
             />
           </div>
 
-          <div class="hidden my-auto ml-9 xl:block">
+          <div class="xl:block hidden my-auto ml-9">
             <div class="flex space-x-2">
               <a
                 *ngIf="currentUser?.rule === 'employee'"
                 [routerLink]="['/', 'show-time']"
                 routerLinkActive="bg-gray-900"
-                class="px-3 py-2 font-medium rounded-md hover:bg-gray-700"
+                class="hover:bg-gray-700 px-3 py-2 rounded-md font-medium"
                 [ngClass]="{
                   'text-gray-300': isMobileMenu,
                   'text-white': !isMobileMenu
@@ -35,7 +35,7 @@
               <a
                 [routerLink]="['/', navLink.path]"
                 routerLinkActive="bg-gray-900"
-                class="px-3 py-2 font-medium rounded-md hover:bg-gray-700"
+                class="hover:bg-gray-700 px-3 py-2 rounded-md font-medium"
                 [ngClass]="{
                   'text-gray-300': isMobileMenu,
                   'text-white': !isMobileMenu
@@ -49,13 +49,13 @@
 
           @if(currentUser?.rule === 'admin'){
 
-          <div class="hidden my-auto ml-9 xl:block">
+          <div class="xl:block hidden my-auto ml-9">
             <div class="flex space-x-2">
               @for (adminLink of adminLinks; track $index) {
               <a
                 [routerLink]="['/', adminLink.path]"
                 routerLinkActive="bg-gray-900"
-                class="px-3 py-2 font-medium rounded-md hover:bg-gray-700"
+                class="hover:bg-gray-700 px-3 py-2 rounded-md font-medium"
                 [ngClass]="{
                   'text-gray-300': isMobileMenu,
                   'text-white': !isMobileMenu
@@ -72,7 +72,7 @@
       </div>
     </div>
 
-    <div class="hidden gap-3 mr-12 md:flex">
+    <div class="md:flex gap-3 hidden mr-12">
       <span class="p-input-icon-left">
         <i class="pi pi-search"></i>
         <input type="text" placeholder="Search" pInputText />
@@ -81,7 +81,7 @@
       <div class="flex items-center">
         <button
           (click)="logout()"
-          class="px-4 py-2 font-bold text-white bg-red-600 rounded focus:outline-none focus:shadow-outline"
+          class="bg-red-600 focus:shadow-outline px-4 py-2 rounded font-bold text-white focus:outline-none"
         >
           Log Out
         </button>
@@ -91,14 +91,14 @@
       <div class="flex items-center bg-gray-400 rounded-md">
         <button
           routerLink="/login"
-          class="py-2 pl-4 font-bold text-white rounded focus:outline-none focus:shadow-outline"
+          class="focus:shadow-outline py-2 pl-4 rounded font-bold text-white focus:outline-none"
         >
           Log In
         </button>
         <span class="mx-2 text-white">/</span>
         <button
           (click)="navigateToRegister()"
-          class="py-2 pr-4 font-bold text-white rounded focus:outline-none focus:shadow-outline"
+          class="focus:shadow-outline py-2 pr-4 rounded font-bold text-white focus:outline-none"
         >
           Sign Up
         </button>
@@ -109,7 +109,7 @@
         <button
           [routerLink]="['/register-employee']"
           [queryParams]="{ rule: 'employee' }"
-          class="px-4 py-2 font-bold text-white bg-gray-400 rounded focus:outline-none focus:shadow-outline"
+          class="bg-gray-400 focus:shadow-outline px-4 py-2 rounded font-bold text-white focus:outline-none"
         >
           Register Employee
         </button>
@@ -117,12 +117,12 @@
       }
     </div>
 
-    <div class="absolute inset-y-0 flex items-center right-3 xl:hidden">
+    <div class="right-3 absolute inset-y-0 flex items-center xl:hidden">
       <!-- Mobile menu button-->
       <button
         type="button"
         (click)="toggleMobileMenu()"
-        class="inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+        class="inline-flex justify-center items-center hover:bg-gray-700 p-2 rounded-md text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
         aria-controls="mobile-menu"
         aria-expanded="false"
       >
@@ -179,14 +179,14 @@
 
   @if(isMobileMenu){
 
-  <div class="border-b-2 xl:hidden" id="mobile-menu">
-    <div class="px-2 pt-2 pb-3 space-y-1">
+  <div class="xl:hidden border-b-2" id="mobile-menu">
+    <div class="space-y-1 px-2 pt-2 pb-3">
       @for (navLink of navLinks; track $index) {
       <a
         [routerLink]="['', navLink.path]"
         routerLinkActive="bg-gray-900"
         (click)="closeMenu()"
-        class="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-700 hover:text-white"
+        class="block hover:bg-gray-700 px-3 py-2 rounded-md font-medium text-base hover:text-white"
         [ngClass]="{
           'text-gray-300': isMobileMenu,
           'text-white': !isMobileMenu
@@ -197,7 +197,7 @@
       }
     </div>
 
-    <div class="flex flex-col gap-3 px-3 py-2 pb-5 md:flex-row md:hidden">
+    <div class="flex md:flex-row flex-col gap-3 md:hidden px-3 py-2 pb-5">
       <span class="p-input-icon-left">
         <i class="pi pi-search"></i>
         <input type="text" placeholder="Search" pInputText />
@@ -207,7 +207,7 @@
       <div class="flex items-center">
         <button
           (click)="logout()"
-          class="px-4 py-2 font-bold text-white bg-red-600 rounded focus:outline-none focus:shadow-outline"
+          class="bg-red-600 focus:shadow-outline px-4 py-2 rounded font-bold text-white focus:outline-none"
         >
           Log Out
         </button>
@@ -217,14 +217,14 @@
       <div class="flex items-center bg-gray-400 rounded-md">
         <button
           routerLink="/login"
-          class="py-2 pl-4 font-bold text-white rounded focus:outline-none focus:shadow-outline"
+          class="focus:shadow-outline py-2 pl-4 rounded font-bold text-white focus:outline-none"
         >
           Log In
         </button>
         <span class="mx-2 text-white">/</span>
         <button
           routerLink="/register"
-          class="py-2 pr-4 font-bold text-white rounded focus:outline-none focus:shadow-outline"
+          class="focus:shadow-outline py-2 pr-4 rounded font-bold text-white focus:outline-none"
         >
           Sign Up
         </button>
@@ -234,14 +234,14 @@
   </div>
   @if(currentUser?.rule === 'admin'){
 
-  <div class="border-b-2 xl:hidden" id="mobile-menu">
-    <div class="px-2 pt-2 pb-3 space-y-1">
+  <div class="xl:hidden border-b-2" id="mobile-menu">
+    <div class="space-y-1 px-2 pt-2 pb-3">
       @for (adminLink of adminLinks; track $index) {
       <a
         [routerLink]="['', adminLink.path]"
         routerLinkActive="bg-gray-900"
         (click)="closeMenu()"
-        class="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-700 hover:text-white"
+        class="block hover:bg-gray-700 px-3 py-2 rounded-md font-medium text-base hover:text-white"
         [ngClass]="{
           'text-gray-300': isMobileMenu,
           'text-white': !isMobileMenu
@@ -252,17 +252,17 @@
       }
     </div>
 
-    <div class="flex gap-3 px-3 py-2 pb-5 md:hidden">
+    <div class="flex gap-3 md:hidden px-3 py-2 pb-5">
       <button
         (click)="logout()"
-        class="px-4 py-2 font-bold text-white bg-red-600 rounded focus:outline-none focus:shadow-outline"
+        class="bg-red-600 focus:shadow-outline px-4 py-2 rounded font-bold text-white focus:outline-none"
       >
         Log Out
       </button>
       <button
         [routerLink]="['/register-employee']"
         [queryParams]="{ rule: 'employee' }"
-        class="px-4 py-2 font-bold text-white bg-gray-400 rounded focus:outline-none focus:shadow-outline"
+        class="bg-gray-400 focus:shadow-outline px-4 py-2 rounded font-bold text-white focus:outline-none"
       >
         Register Employee
       </button>
@@ -271,5 +271,3 @@
 
   } }
 </nav>
-
-<p-toast></p-toast>
